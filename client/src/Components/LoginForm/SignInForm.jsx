@@ -3,6 +3,7 @@ import Logo from "./Logo";
 import { Link } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../FireBase/FireBase";
+import { updateStreak } from "../Calendar/updateStreak";
 import { useNavigate } from "react-router-dom";
 
 const SignInForm = ({ handleFocus, handleBlur, toggleForm }) => {
@@ -13,16 +14,16 @@ const SignInForm = ({ handleFocus, handleBlur, toggleForm }) => {
     password: "",
   });
 
-  function handleChange(event) {
+  const handleChange = (event) => {
     const { name, value } = event.target;
 
-    setSignin((prevalue) => ({
-      ...prevalue,
+    setSignin((prevState) => ({
+      ...prevState,
       [name]: value,
     }));
-  }
+  };
 
-  async function handleSubmit(event) {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
@@ -33,12 +34,12 @@ const SignInForm = ({ handleFocus, handleBlur, toggleForm }) => {
       );
       const user = userCredential.user;
 
+      await updateStreak();
+
       console.log("User logged in successfully", signin);
 
-      // Get the ID token
       const token = await user.getIdToken();
 
-      // Store the token in localStorage (or a cookie if preferred)
       localStorage.setItem("authToken", token);
 
       setSignin({
@@ -50,15 +51,12 @@ const SignInForm = ({ handleFocus, handleBlur, toggleForm }) => {
     } catch (err) {
       console.log(err.message);
     }
-  }
+
+    
+  };
 
   return (
-    <form
-      action="index.html"
-      autoComplete="off"
-      className="sign-in-form"
-      onSubmit={handleSubmit}
-    >
+    <form className="sign-in-form" autoComplete="off" onSubmit={handleSubmit}>
       <Logo />
       <div className="heading">
         <h2>Welcome Back</h2>
@@ -73,7 +71,6 @@ const SignInForm = ({ handleFocus, handleBlur, toggleForm }) => {
           <input
             type="email"
             className="input-field"
-            autoComplete="off"
             name="email"
             value={signin.email}
             required
@@ -87,9 +84,7 @@ const SignInForm = ({ handleFocus, handleBlur, toggleForm }) => {
         <div className="input-wrap">
           <input
             type="password"
-            minLength="4"
             className="input-field"
-            autoComplete="off"
             name="password"
             value={signin.password}
             required
@@ -103,7 +98,7 @@ const SignInForm = ({ handleFocus, handleBlur, toggleForm }) => {
         <input type="submit" value="Sign In" className="sign-btn" />
 
         <p className="text">
-          Forgotten your password or your login details?
+          Forgotten your password or your login details?{" "}
           <Link to="#">Get help</Link> signing in
         </p>
       </div>

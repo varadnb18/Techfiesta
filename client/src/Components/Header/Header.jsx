@@ -6,7 +6,6 @@ import { doc, getDoc } from "firebase/firestore";
 function Header() {
   const [userDetails, setUserDetails] = useState(null);
   const [header, setHeader] = useState(false);
-  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   const fetchUserData = async () => {
@@ -23,7 +22,6 @@ function Header() {
       } else {
         console.log("User is not logged in.");
       }
-      setLoading(false);
     });
   };
 
@@ -39,13 +37,10 @@ function Header() {
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     setHeader(false);
+    setUserDetails(null); // Clear user details after logout
     alert("Logged out successfully!");
     navigate("/");
   };
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div>
