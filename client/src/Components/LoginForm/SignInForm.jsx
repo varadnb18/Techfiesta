@@ -38,6 +38,7 @@ const SignInForm = ({ handleFocus, handleBlur, toggleForm }) => {
       navigate("/");
     } catch (err) {
       console.log(err.message);
+      alert("Invalid Credentials");
     }
   };
 
