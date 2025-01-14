@@ -8,15 +8,10 @@ import { useNavigate } from "react-router-dom";
 
 const SignInForm = ({ handleFocus, handleBlur, toggleForm }) => {
   const navigate = useNavigate();
-
-  const [signin, setSignin] = useState({
-    email: "",
-    password: "",
-  });
+  const [signin, setSignin] = useState({ email: "", password: "" });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-
     setSignin((prevState) => ({
       ...prevState,
       [name]: value,
@@ -36,23 +31,14 @@ const SignInForm = ({ handleFocus, handleBlur, toggleForm }) => {
 
       await updateStreak();
 
-      console.log("User logged in successfully", signin);
-
       const token = await user.getIdToken();
-
       localStorage.setItem("authToken", token);
 
-      setSignin({
-        email: "",
-        password: "",
-      });
-
+      setSignin({ email: "", password: "" });
       navigate("/");
     } catch (err) {
       console.log(err.message);
     }
-
-    
   };
 
   return (

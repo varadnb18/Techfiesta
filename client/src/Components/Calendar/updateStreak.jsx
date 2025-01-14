@@ -11,20 +11,20 @@ export const updateStreak = async () => {
   try {
     const userDoc = await getDoc(userRef);
 
-    let currentDate = new Date().toLocaleDateString("en-CA"); // Local date in YYYY-MM-DD format
-    let streak = [];
+    let currentDate = new Date().toLocaleDateString("en-CA");
+    let streaks = [];
 
     if (userDoc.exists()) {
-      streak = userDoc.data().streak || [];
+      streaks = userDoc.data().streak || [];
     }
 
     console.log("Current Date:", currentDate);
-    console.log("Existing Streak:", streak);
+    console.log("Existing Streaks:", streaks);
 
-    if (!streak.includes(currentDate)) {
-      const lastDate = streak[streak.length - 1];
-      console.log("Last Date in Streak:", lastDate);
+    const lastStreak = streaks[streaks.length - 1] || [];
+    const lastDate = lastStreak[lastStreak.length - 1];
 
+    if (!lastStreak.includes(currentDate)) {
       if (lastDate) {
         const difference = new Date(currentDate) - new Date(lastDate);
         const daysGap = difference / (1000 * 60 * 60 * 24);
@@ -32,19 +32,27 @@ export const updateStreak = async () => {
         console.log("Days Gap:", daysGap);
 
         if (daysGap === 1) {
-          streak.push(currentDate);
-          console.log("Streak Continued. Updated Streak:", streak);
+          lastStreak.push(currentDate);
+          console.log("Streak Continued. Updated Last Streak:", lastStreak);
         } else {
-          streak = [currentDate];
-          console.log("Streak Reset. New Streak:", streak);
+          streaks.push([currentDate]); // A new streak is started
+          console.log("New Streak Started. Updated Streaks:", streaks);
         }
       } else {
-        streak = [currentDate];
-        console.log("First Entry in Streak. New Streak:", streak);
+        streaks.push([currentDate]); // First streak entry
+        console.log("First Entry in Streaks. New Streaks:", streaks);
       }
 
-      await updateDoc(userRef, { streak });
-      console.log("Database Updated Successfully with Streak:", streak);
+      // Flatten the streaks array before updating Firebase
+      const flattenedStreaks = streaks.flat();
+      console.log("Flattened Streaks (1D):", flattenedStreaks);
+
+      // Update Firebase with the flattened streaks array
+      await updateDoc(userRef, { streak: flattenedStreaks });
+      console.log(
+        "Database Updated Successfully with Streaks:",
+        flattenedStreaks
+      );
     } else {
       console.log("Today's date is already in the streak. No update needed.");
     }

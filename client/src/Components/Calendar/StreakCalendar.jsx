@@ -16,7 +16,11 @@ const StreakCalendar = () => {
         const userDoc = await getDoc(userRef);
 
         if (userDoc.exists()) {
-          setStreak(userDoc.data().streak || []);
+          const fetchedStreak = userDoc.data().streak || [];
+          const formattedStreak = fetchedStreak.map((date) =>
+            new Date(date).toLocaleDateString("en-CA")
+          );
+          setStreak(formattedStreak);
         }
       }
     };
@@ -24,9 +28,14 @@ const StreakCalendar = () => {
     fetchStreak();
   }, []);
 
+  const normalizeDate = (date) => {
+    const offset = date.getTimezoneOffset() * 60000;
+    return new Date(date.getTime() - offset).toISOString().split("T")[0];
+  };
+
   const tileClassName = ({ date, view }) => {
     if (view === "month") {
-      const dateString = date.toISOString().split("T")[0];
+      const dateString = normalizeDate(date);
       if (streak.includes(dateString)) {
         return "streak-day";
       }
