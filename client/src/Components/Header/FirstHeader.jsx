@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 function FirstHeader() {
   return (
     <>
-      <div className="w-44 h-9 ml-5">
+      <div className="w-44 h-9 ml-7">
         <img
           src="https://www.ekhartyoga.com/media/image/articles/logo-with-text.svg"
           alt=""
         />
       </div>
       <div className="flex items-center">
-        <ul className="flex space-x-8 font-medium" style={{ color: "#08656e" }}>
+        <ul className="flex space-x-8 font-[600]" style={{ color: "#08656e" }}>
           <li>Classes</li>
           <li>Programs</li>
           <li>Teachers</li>
@@ -23,7 +23,7 @@ function FirstHeader() {
       <div className="flex items-center">
         <Link to="/Login-Page">
           <button
-            className=" mr-5 text-white font-[600] rounded-3xl text-[1rem]"
+            className=" mr-7 text-white font-[600] rounded-3xl text-[1rem]"
             style={{
               backgroundColor: "#08656e",
               paddingRight: "3.4em",

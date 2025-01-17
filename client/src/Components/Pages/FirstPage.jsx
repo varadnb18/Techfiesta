@@ -2,7 +2,6 @@ import React from "react";
 import FirstHeader from "../Header/FirstHeader";
 import Heading from "../UI/Heading";
 import Container from "../UI/Container";
-import { data } from "../../data";
 
 function FirstPage() {
   return (
@@ -23,7 +22,7 @@ function FirstPage() {
       </div>
       <div className="flex justify-center">
         <div className="w-[98.5%] h-[26rem]">
-          <Container datas={data} />
+          <Container />
         </div>
       </div>
       <div>hii</div>

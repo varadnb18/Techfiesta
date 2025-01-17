@@ -76,7 +76,11 @@ const LoginPage = () => {
   };
 
   return (
-    <main className={isSignUpMode ? "sign-up-mode" : ""}>
+    <main
+      className={`flex justify-center items-center min-h-screen ${
+        isSignUpMode ? "sign-up-mode" : ""
+      }`}
+    >
       <div className="box">
         <div className="inner-box">
           <div className="forms-wrap">
