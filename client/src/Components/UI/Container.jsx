@@ -1,7 +1,24 @@
-import React from "react";
-import { data } from "../../data";
+import React, { useEffect, useState } from "react";
+import { db } from "../FireBase/FireBase";
+import { collection, getDocs } from "firebase/firestore";
 
 function Container() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "exercises"));
+        const dataList = querySnapshot.docs.map((doc) => doc.data());
+        setData(dataList);
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div
       className="grid ml-7 mr-7 gap-4 cursor-pointer"
@@ -14,7 +31,7 @@ function Container() {
         <div key={index} className="flex flex-col items-center">
           <img
             src={datas.img}
-            alt=""
+            alt={datas.name}
             className="w-[21.7rem] h-[12.4rem] object-cover"
           />
           <div className="content p-[0.7rem] pb-[0rem]">
