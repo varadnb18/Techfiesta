@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../FireBase/FireBase";
 import { collection, getDocs } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 function Container() {
   const [data, setData] = useState([]);
+
+  const navigate = useNavigate();
+
+  const HandleClick = (data) => {
+    navigate(`/${data.name}`);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,7 +35,11 @@ function Container() {
       }}
     >
       {data.map((datas, index) => (
-        <div key={index} className="flex flex-col items-center">
+        <div
+          key={index}
+          className="flex flex-col items-center"
+          onClick={() => HandleClick(datas)}
+        >
           <img
             src={datas.img}
             alt={datas.name}
