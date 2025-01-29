@@ -1,0 +1,51 @@
+body {
+  height: 100%;
+  width: 100%;
+}
+
+.word {
+  color: #6cb33f;
+  font-size: 60px;
+}
+
+.demo {
+  background-color: #ff5733;
+}
+
+.A {
+  font-size: 60px;
+}
+
+/* .element {
+  background: radial-gradient(
+    ellipse at top left,
+    rgb(191, 239, 191) 5%,
+    rgb(218, 255, 255) 20%,
+    white 60%
+  );
+} */
+
+.element {
+  background: linear-gradient(
+    to right,
+    #eaf8e4 15%,
+    rgb(220, 248, 248) 30%,
+    white 90%
+  );
+  background-size: 100% 50%;
+  z-index: -2;
+}
+
+.image-container {
+  position: absolute;
+  top: -5px;
+  left: -160px;
+  width: 61%;
+  height: 86vh;
+  z-index: 1;
+}
+
+.top-image {
+  width: 100%;
+  height: 100%;
+}

@@ -15,7 +15,7 @@ function FilterDropdown({ title }) {
           borderRadius: "4px",
           fontSize: "14px",
           fontWeight: "500",
-          padding: "21px 25px",
+          padding: "10px 10px",
         }}
       >
         {title}

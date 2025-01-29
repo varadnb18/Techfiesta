@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Calendar from "react-calendar";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../FireBase/FireBase";
 import "react-calendar/dist/Calendar.css";
+import CalendarUI from "./CalendarUI";
+import "./StreakCalendar.css";
 
 const StreakCalendar = () => {
   const [streak, setStreak] = useState([]);
@@ -55,40 +56,12 @@ const StreakCalendar = () => {
     return <div>Loading...</div>;
   }
 
+  console.log("yohoo", streak);
+
   return (
     <div>
-      <Calendar tileClassName={tileClassName} />
-      <style>{`
-  .streak-day {
-    background-color: #4caf50;
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 40px;
-    width: 20px;
-    font-size: 10px;
-  }
-
-  .react-calendar {
-  width: 400px; 
-  height: auto;  
-}
-  .react-calendar {
-    border: none;
-  }
-
-  .react-calendar__month-view__days__day {
-    padding: 10px;  /* Increase padding around each day */
-  }
-
-  .react-calendar__month-view__weekdays {
-    font-weight: 300;
-    color: #7f7f7f;
-    text-decoration: none !important;
-  }
-`}</style>
+      {/* Pass both streak and tileClassName as props */}
+      <CalendarUI streak={streak} tileClassName={tileClassName} />
     </div>
   );
 };

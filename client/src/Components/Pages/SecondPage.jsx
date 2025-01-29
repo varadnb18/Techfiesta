@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import FirstHeader from "../Header/FirstHeader";
 import SearchBar from "../Header/SearchBar";
 import Container from "../UI/Container";
 import FilterDropdown from "../UI/FilterDropdown";
 
 function SecondPage() {
+  const [active, setActive] = useState("Classes");
+
   return (
     <>
       <div
@@ -49,16 +51,23 @@ function SecondPage() {
         <div className="w-[79%] h-[22.4rem] mt-8">
           <div className=" flex justify-between">
             <div className="flex items-center">
-              <ul
-                className="flex items-center justify-between w-[27rem] ml-10 font-[600]"
-                style={{ color: "#08656e" }}
-              >
-                <li>Classes</li>
-                <li>Live Classes</li>
-                <li>Programs</li>
-                <li>Playlists</li>
+              <ul className="flex items-center justify-between w-[27rem] ml-10 font-[600] text-[#08656e] ">
+                {["Classes", "Live", "Programs", "Playlists"].map((item) => (
+                  <li
+                    key={item}
+                    className={`px-4 py-2 cursor-pointer transition-all ${
+                      active === item
+                        ? "bg-[#d8eceb] rounded-full text-[#08656e]"
+                        : "text-[#08656e]"
+                    }`}
+                    onClick={() => setActive(item)}
+                  >
+                    {item}
+                  </li>
+                ))}
               </ul>
             </div>
+
             <div>
               <SearchBar />
             </div>

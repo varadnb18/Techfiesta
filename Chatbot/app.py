@@ -12,7 +12,7 @@ import os
 
 from flask import Flask, jsonify, request, send_file, send_from_directory
 
-# HumanMessage from langchain_core.messages: Represents a message from a human user.
+# HumanMessage from langchain_core.messages: Represents a np message from a human user.
 # ChatGoogleGenerativeAI from langchain_google_genai: Provides a chat interface for Google's generative AI.
 
 from langchain_core.messages import HumanMessage
