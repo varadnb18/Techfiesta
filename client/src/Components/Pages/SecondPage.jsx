@@ -3,6 +3,7 @@ import FirstHeader from "../Header/FirstHeader";
 import SearchBar from "../Header/SearchBar";
 import Container from "../UI/Container";
 import FilterDropdown from "../UI/FilterDropdown";
+import Title from "../UI/Title";
 
 function SecondPage() {
   const [active, setActive] = useState("Classes");
@@ -21,11 +22,8 @@ function SecondPage() {
           className="flex items-center"
           style={{ width: "100%", height: "7rem" }}
         >
-          <div
-            className="flex justify-between"
-            style={{ width: "100%", height: "3rem" }}
-          >
-            <FirstHeader />
+          <div className="ml-7" style={{ width: "100%", height: "7rem" }}>
+            <Title />
           </div>
         </div>
         <div className="flex justify-center items-center w-full h-[22rem]">

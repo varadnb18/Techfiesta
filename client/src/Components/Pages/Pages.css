@@ -8,22 +8,9 @@ body {
   font-size: 60px;
 }
 
-.demo {
-  background-color: #ff5733;
-}
-
 .A {
   font-size: 60px;
 }
-
-/* .element {
-  background: radial-gradient(
-    ellipse at top left,
-    rgb(191, 239, 191) 5%,
-    rgb(218, 255, 255) 20%,
-    white 60%
-  );
-} */
 
 .element {
   background: linear-gradient(
@@ -43,6 +30,13 @@ body {
   width: 61%;
   height: 86vh;
   z-index: 1;
+  pointer-events: none;
+}
+
+.demo {
+  background-color: #ff5733;
+  position: relative;
+  z-index: 10;
 }
 
 .top-image {
