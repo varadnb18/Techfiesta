@@ -123,6 +123,7 @@ function NewFP() {
               allow="autoplay; encrypted-media"
               allowFullScreen
               className="w-[630px] h-[530px] rounded-sm"
+              muted
             />
           </div>
         </div>

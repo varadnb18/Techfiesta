@@ -20,12 +20,33 @@ function FilterDropdown({ title }) {
       >
         {title}
       </MenuButton>
-      <MenuList>
-        <MenuItem>Teachers</MenuItem>
-        <MenuItem>Style</MenuItem>
-        <MenuItem>Duration</MenuItem>
-        <MenuItem>Level</MenuItem>
-        <MenuItem>Specific Use</MenuItem>
+      <MenuList
+        sx={{
+          backgroundColor: "white",
+          border: "1px solid #e2e8f0",
+          padding: "10px",
+          boxShadow: "md",
+          borderRadius: "4px",
+        }}
+      >
+        {["Teachers", "Style", "Duration", "Level", "Specific Use"].map(
+          (item, index) => (
+            <MenuItem
+              key={index}
+              sx={{
+                padding: "8px 12px",
+                fontSize: "14px",
+                fontWeight: "500",
+                color: "#333",
+                borderRadius: "4px",
+                _hover: { backgroundColor: "#f0f0f0" },
+                _focus: { backgroundColor: "#e2e8f0" },
+              }}
+            >
+              {item}
+            </MenuItem>
+          )
+        )}
       </MenuList>
     </Menu>
   );

@@ -71,7 +71,7 @@ function SecondPage() {
             </div>
           </div>
 
-          <div className="mt-9 ml-5 flex justify-start gap-6">
+          <div className="mt-9 ml-10 flex justify-start gap-6">
             <FilterDropdown title="Teachers" />
             <FilterDropdown title="Style" />
             <FilterDropdown title="Duration" />
