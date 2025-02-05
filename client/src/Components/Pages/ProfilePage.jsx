@@ -1,8 +1,9 @@
 import React from "react";
 import StreakCalendar from "../Calendar/StreakCalendar";
 import Title from "../UI/Title";
-import BarChart from "../UI/BarChart";
 import YogaScreenTimeChart from "../UI/YogaScreenTimeChart";
+import ExerciseTimeChart from "../UI/ExerciseTimeChart";
+import ProfileTitle from "../UI/ProfileTitle";
 
 const StatBox = ({ number, label }) => {
   return (
@@ -22,30 +23,33 @@ function ProfilePage() {
   ];
 
   return (
-    <div className="">
+    <div>
       <div>
-        <Title />
+        <ProfileTitle />
       </div>
-      <div className="flex justify-evenly ">
-        <div>
-          <div className="p-8 pb-3 pt-7 flex flex-col items-start">
-            <h1 className="text-3xl font-bold text-left text-[#333] mb-2 leading-[1.4]">
+
+      <div
+        className="grid grid-cols-3"
+        style={{ gridTemplateColumns: "45% 35% 20%" }}
+      >
+        <div className="flex flex-col items-center w-[100%] ml-10">
+          <div className="p-8 w-[90%] pb-5 pt-5 flex flex-col items-start">
+            <h1 className="text-3xl font-bold text-left text-[#333] mb-3 leading-normal">
               Breathe deep, 🧘🏻‍♀️🌿
               <br />
               Find balance, flow with peace!
             </h1>
-            <p className="text-lg text-center text-[#666] leading-relaxed">
+            <p className="text-lg text-center text-[#666] leading-relaxed mb-3">
               Embrace the journey. The body achieves what the mind believes.
             </p>
           </div>
 
-          <div style={{ width: "600px" }}>
-            {/* <BarChart /> */}
+          <div style={{ minWidth: "600px" }}>
             <YogaScreenTimeChart />
           </div>
 
           <div className="p-4">
-            <div className="flex gap-4 ml-5">
+            <div className="flex gap-6 ml-5">
               {stats.map((stat, index) => (
                 <StatBox key={index} number={stat.number} label={stat.label} />
               ))}
@@ -53,8 +57,35 @@ function ProfilePage() {
           </div>
         </div>
 
-        <div style={{ width: "600px", paddingTop: "50px" }}>
-          <StreakCalendar />
+        <div className="flex flex-col items-center w-[100%]">
+          <div className="w-[320px] pb-5">
+            <ExerciseTimeChart />
+          </div>
+          <div className="w-[105%] mt-[-40px] z-30">
+            <StreakCalendar />
+          </div>
+        </div>
+
+        <div className="flex flex-col items-center p-[30px] pl-[0px] space-y-4">
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus
+            omnis exercitationem, nesciunt laboriosam molestias voluptates?
+            Voluptates explicabo, libero optio ipsam quae expedita a corrupti
+            illum minima, quibusdam blanditiis. Odit id earum ullam veniam
+            nesciunt, quo optio iusto nam voluptatibus ipsa perspiciatis cumque
+            totam tempore modi nobis porro fugiat eligendi! Autem provident
+            minima omnis placeat consequuntur corporis magnam ratione eius,
+            molestias quibusdam sint illo labore debitis explicabo, possimus
+            fuga. Est, doloremque ipsam at neque unde qui molestiae vero in illo
+            libero, doloribus dolorum laudantium animi error eius amet, nobis
+            distinctio veritatis perspiciatis odio quos! Assumenda at, tempore
+            eaque molestias esse cupiditate aut necessitatibus a quod quam
+            consequuntur, laborum magni hic saepe quis sunt officia nisi facilis
+            error aliquid porro similique repellendus, quas provident. Quos
+            culpa eligendi debitis molestiae tempore minus qui dolor dolore
+            odio, modi possimus autem quia libero natus nam blanditiis quas
+            placeat omnis in itaque expedita rerum repellendus. Soluta.
+          </p>
         </div>
       </div>
     </div>
