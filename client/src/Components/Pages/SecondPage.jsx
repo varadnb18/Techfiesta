@@ -29,7 +29,7 @@ function SecondPage() {
         <div className="flex justify-center items-center w-full h-[22rem]">
           <div className="w-[74%] h-[22.4rem]">
             <h1
-              class="text-left font-semibold text-4xl md:text-5xl text-bluelagoon-400 mb-6 mt-4 md:mt-8"
+              className="text-left font-semibold text-4xl md:text-5xl text-bluelagoon-400 mb-6 mt-4 md:mt-8"
               style={{ color: "#08656e" }}
             >
               Online Yoga Classes

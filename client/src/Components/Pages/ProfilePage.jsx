@@ -78,13 +78,7 @@ function ProfilePage() {
             molestias quibusdam sint illo labore debitis explicabo, possimus
             fuga. Est, doloremque ipsam at neque unde qui molestiae vero in illo
             libero, doloribus dolorum laudantium animi error eius amet, nobis
-            distinctio veritatis perspiciatis odio quos! Assumenda at, tempore
-            eaque molestias esse cupiditate aut necessitatibus a quod quam
-            consequuntur, laborum magni hic saepe quis sunt officia nisi facilis
-            error aliquid porro similique repellendus, quas provident. Quos
-            culpa eligendi debitis molestiae tempore minus qui dolor dolore
-            odio, modi possimus autem quia libero natus nam blanditiis quas
-            placeat omnis in itaque expedita rerum repellendus. Soluta.
+            distinctio veritatis perspiciatis odio quos!
           </p>
         </div>
       </div>
