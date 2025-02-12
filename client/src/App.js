@@ -8,16 +8,41 @@ import SecondPage from "./Components/Pages/SecondPage";
 import ProfilePage from "./Components/Pages/ProfilePage";
 import SplitingWindow from "./Components/Pages/SplitingWindow";
 import NewFP from "./Components/Pages/NewFP";
+import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<NewFP />} />{" "}
-      <Route path="/programs" element={<SecondPage />} />{" "}
-      <Route path="/Profile" element={<ProfilePage />} />{" "}
-      <Route path="/:name" element={<SplitingWindow />} />{" "}
-      <Route path="/Login-Page" element={<LoginPage />} />{" "}
-      <Route path="*" element={<NotFound />} />{" "}
+      <Route path="/" element={<NewFP />} />
+      <Route path="/Login-Page" element={<LoginPage />} />
+
+      {/* Protected Routes */}
+      <Route
+        path="/programs"
+        element={
+          <ProtectedRoute>
+            <SecondPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/Profile"
+        element={
+          <ProtectedRoute>
+            <ProfilePage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/:name"
+        element={
+          <ProtectedRoute>
+            <SplitingWindow />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

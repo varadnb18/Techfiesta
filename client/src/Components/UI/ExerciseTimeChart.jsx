@@ -6,6 +6,19 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
+const SkeletonLoader = () => {
+  return (
+    <div className="flex justify-center items-center w-full h-80">
+      <div className="relative w-48 h-48 bg-gray-300 animate-pulse rounded-full"></div>
+      <div className="ml-3">
+        <div className="w-24 h-4 bg-gray-300 animate-pulse mb-3"></div>
+        <div className="w-20 h-4 bg-gray-300 animate-pulse mb-3"></div>
+        <div className="w-28 h-4 bg-gray-300 animate-pulse"></div>
+      </div>
+    </div>
+  );
+};
+
 const ExerciseTimeChart = () => {
   const [exerciseData, setExerciseData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -25,14 +38,11 @@ const ExerciseTimeChart = () => {
         if (userDoc.exists()) {
           const userData = userDoc.data();
           const exerciseTime = userData.exerciseTime || {};
+          const today = new Date().toISOString().split("T")[0];
 
           const exercises = Object.keys(exerciseTime);
           const timeData = exercises.map((exercise) => {
-            const totalTime = Object.values(exerciseTime[exercise]).reduce(
-              (sum, time) => sum + time,
-              0
-            );
-            return totalTime;
+            return exerciseTime[exercise][today] || 0;
           });
 
           setExerciseData({
@@ -63,7 +73,7 @@ const ExerciseTimeChart = () => {
       } catch (error) {
         console.error("Error fetching exercise time:", error);
       } finally {
-        setIsLoading(false);
+        setTimeout(() => setIsLoading(false), 900);
       }
     };
 
@@ -78,28 +88,28 @@ const ExerciseTimeChart = () => {
     return () => unsubscribe();
   }, []);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div className="flex justify-center">
       <div style={{ width: "100%" }}>
-        <Pie
-          data={exerciseData}
-          options={{
-            responsive: true,
-            plugins: {
-              legend: {
-                position: "right",
-                labels: {
-                  boxWidth: 15,
-                  paddingtop: 5,
+        {isLoading ? (
+          <SkeletonLoader />
+        ) : (
+          <Pie
+            data={exerciseData}
+            options={{
+              responsive: true,
+              plugins: {
+                legend: {
+                  position: "right",
+                  labels: {
+                    boxWidth: 15,
+                    paddingtop: 5,
+                  },
                 },
               },
-            },
-          }}
-        />
+            }}
+          />
+        )}
       </div>
     </div>
   );

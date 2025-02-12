@@ -9,9 +9,12 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ProfilePopup = ({ handleLogout }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   return (
     <Box position="relative">
@@ -63,12 +66,16 @@ const ProfilePopup = ({ handleLogout }) => {
             <Text px={3} py={2} _hover={{ bg: "gray.100", cursor: "pointer" }}>
               Help Centre
             </Text>
+
             <Text
               px={3}
               py={2}
               _hover={{ bg: "gray.100", cursor: "pointer" }}
               color="red.500"
-              onClick={handleLogout}
+              onClick={() => {
+                handleLogout();
+                navigate("/");
+              }}
             >
               Log out
             </Text>

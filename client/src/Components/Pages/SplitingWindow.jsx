@@ -9,7 +9,7 @@ function SplitingWindow() {
   const userId = auth.currentUser?.uid;
   const startTimeRef = useRef(Date.now());
   const totalStartTimeRef = useRef(Date.now());
-  const screenStartTimeRef = useRef(Date.now()); // Reference to track screen time
+  const screenStartTimeRef = useRef(Date.now());
 
   useEffect(() => {
     if (!userId) return;
@@ -30,7 +30,6 @@ function SplitingWindow() {
         if (userDoc.exists()) {
           const userData = userDoc.data();
 
-          // Update exercise time
           const currentExerciseTime = userData.exerciseTime?.[name] || {};
           const updatedMinutes =
             (currentExerciseTime[today] || 0) + durationInMinutes;
@@ -43,7 +42,6 @@ function SplitingWindow() {
             },
           };
 
-          // Update total time
           const totalTimeInMs = Date.now() - totalStartTimeRef.current;
           const totalTimeInMinutes = Math.floor(totalTimeInMs / 60000);
 
@@ -51,7 +49,6 @@ function SplitingWindow() {
           const updatedTotalTimeInMinutes =
             updatedTotalTime + totalTimeInMinutes;
 
-          // Update screen time
           const screenTimeInMs = Date.now() - screenStartTimeRef.current;
           const screenTimeInMinutes = Math.floor(screenTimeInMs / 60000);
 
@@ -64,7 +61,6 @@ function SplitingWindow() {
             [today]: updatedScreenTimeForToday,
           };
 
-          // Update Firestore with exercise time, total time, and screen time
           await updateDoc(userRef, {
             exerciseTime: updatedExerciseTime,
             totalTime: updatedTotalTimeInMinutes,
@@ -75,7 +71,6 @@ function SplitingWindow() {
             "Exercise time, total time, and screen time updated in Firestore!"
           );
 
-          // Reset start times
           startTimeRef.current = Date.now();
           totalStartTimeRef.current = Date.now();
           screenStartTimeRef.current = Date.now();
@@ -87,7 +82,7 @@ function SplitingWindow() {
       }
     };
 
-    const interval = setInterval(updateExerciseTime, 10000); // Update every 10 seconds
+    const interval = setInterval(updateExerciseTime, 10000);
 
     return () => {
       updateExerciseTime();

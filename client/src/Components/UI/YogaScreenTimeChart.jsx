@@ -90,7 +90,19 @@ const YogaScreenTimeChart = () => {
   }, []);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex flex-col space-y-2 p-6 w-full max-w-2xl mx-auto animate-pulse">
+        <div className="h-7 bg-gray-300 rounded w-1/3"></div>
+        <div className="h-48 bg-gray-300 rounded-md"></div>
+        <div className="flex space-x-2 mt-2">
+          {Array(7)
+            .fill(0)
+            .map((_, i) => (
+              <div key={i} className="h-4 w-8 bg-gray-300 rounded"></div>
+            ))}
+        </div>
+      </div>
+    );
   }
 
   const data = {

@@ -52,15 +52,10 @@ const StreakCalendar = () => {
     return null;
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
   console.log("yohoo", streak);
 
   return (
     <div>
-      {/* Pass both streak and tileClassName as props */}
       <CalendarUI streak={streak} tileClassName={tileClassName} />
     </div>
   );

@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./CalendarUI.css";
 
 const CalendarUI = ({ tileClassName, streak }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  console.log("your:", tileClassName);
-  console.log("streak:", streak);
+  useEffect(() => {
+    setTimeout(() => setIsLoading(false), 2000);
+  }, []);
 
   const daysOfWeek = ["M", "T", "W", "T", "F", "S", "S"];
 
@@ -79,6 +81,32 @@ const CalendarUI = ({ tileClassName, streak }) => {
 
     return days;
   };
+
+  if (isLoading) {
+    return (
+      <div className="calendar">
+        <div className="header">
+          <div className="w-36 h-6 bg-gray-300 rounded animate-pulse mx-auto"></div>
+        </div>
+        <div className="grid grid-cols-7 gap-2 p-2">
+          {daysOfWeek.map((_, index) => (
+            <div
+              key={index}
+              className="w-8 h-6 bg-gray-300 rounded animate-pulse"
+            ></div>
+          ))}
+        </div>
+        <div className="grid grid-cols-7 gap-2 p-2">
+          {[...Array(42)].map((_, i) => (
+            <div
+              key={i}
+              className="w-10 h-10 bg-gray-300 rounded animate-pulse"
+            ></div>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="calendar">
