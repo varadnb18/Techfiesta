@@ -97,7 +97,7 @@ const CalendarUI = ({ tileClassName, streak }) => {
           ))}
         </div>
         <div className="grid grid-cols-7 gap-2 p-2">
-          {[...Array(42)].map((_, i) => (
+          {[...Array(35)].map((_, i) => (
             <div
               key={i}
               className="w-10 h-10 bg-gray-300 rounded animate-pulse"

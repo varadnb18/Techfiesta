@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import FirstHeader from "../Header/FirstHeader";
 import SearchBar from "../Header/SearchBar";
 import Container from "../UI/Container";
 import FilterDropdown from "../UI/FilterDropdown";

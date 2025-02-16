@@ -1,36 +1,80 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { doc, getDoc } from "firebase/firestore";
+import { auth, db } from "../FireBase/FireBase";
 import StreakCalendar from "../Calendar/StreakCalendar";
-import Title from "../UI/Title";
 import YogaScreenTimeChart from "../UI/YogaScreenTimeChart";
 import ExerciseTimeChart from "../UI/ExerciseTimeChart";
 import ProfileTitle from "../UI/ProfileTitle";
+import PersonalInfo from "../UI/PersonalInfo"; // <-- Import the new file
 
-const StatBox = ({ number, label }) => {
-  return (
-    <div className="w-32 h-32 border border-gray-300 rounded flex flex-col items-center justify-center text-center">
-      <span className="text-2xl font-bold">{number}</span>
-      <span className="text-sm">{label}</span>
-    </div>
-  );
-};
+const StatBox = ({ number, label }) => (
+  <div className="w-32 h-32 border border-gray-300 rounded flex flex-col items-center justify-center text-center">
+    <span className="text-2xl font-bold">{number}</span>
+    <span className="text-sm">{label}</span>
+  </div>
+);
 
 function ProfilePage() {
-  const stats = [
-    { number: 428, label: "Total Sessions" },
-    { number: 95, label: "Total Visitors" },
-    { number: 88, label: "New Visitors" },
-    { number: "1.0 days", label: "Time Spent" },
-  ];
+  const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [stats, setStats] = useState({
+    totalSessions: 0,
+    totalVisitors: 0,
+    newVisitors: 0,
+    timeSpent: "0 days",
+  });
+
+  const calculateAge = (birthDate) => {
+    if (!birthDate) return "N/A";
+    const birth = new Date(birthDate);
+    const today = new Date();
+    let age = today.getFullYear() - birth.getFullYear();
+    if (
+      today.getMonth() < birth.getMonth() ||
+      (today.getMonth() === birth.getMonth() &&
+        today.getDate() < birth.getDate())
+    ) {
+      age--;
+    }
+    return age;
+  };
+
+  useEffect(() => {
+    const fetchUserData = async (userId) => {
+      if (!userId) return;
+      try {
+        const userRef = doc(db, "users", userId);
+        const userDoc = await getDoc(userRef);
+        if (userDoc.exists()) {
+          const data = userDoc.data();
+          setUserData({ ...data, age: calculateAge(data.date_of_birth) });
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        fetchUserData(user.uid);
+      } else {
+        setUserData(null);
+        setLoading(false);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   return (
     <div>
-      <div>
-        <ProfileTitle />
-      </div>
+      <ProfileTitle />
 
       <div
         className="grid grid-cols-3"
-        style={{ gridTemplateColumns: "45% 35% 20%" }}
+        style={{ gridTemplateColumns: "45% 32% 23%" }}
       >
         <div className="flex flex-col items-center w-[100%] ml-10">
           <div className="p-8 w-[90%] pb-5 pt-5 flex flex-col items-start">
@@ -50,9 +94,10 @@ function ProfilePage() {
 
           <div className="p-4">
             <div className="flex gap-6 ml-5">
-              {stats.map((stat, index) => (
-                <StatBox key={index} number={stat.number} label={stat.label} />
-              ))}
+              <StatBox number={stats.totalSessions} label="Total Sessions" />
+              <StatBox number={stats.totalVisitors} label="Total Visitors" />
+              <StatBox number={stats.newVisitors} label="New Visitors" />
+              <StatBox number={stats.timeSpent} label="Time Spent" />
             </div>
           </div>
         </div>
@@ -61,26 +106,12 @@ function ProfilePage() {
           <div className="w-[320px] pb-5">
             <ExerciseTimeChart />
           </div>
-          <div className="w-[105%] mt-[-40px] z-30">
+          <div className="w-[70%] mt-[-40px] z-30">
             <StreakCalendar />
           </div>
         </div>
 
-        <div className="flex flex-col items-center p-[30px] pl-[0px] space-y-4">
-          <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus
-            omnis exercitationem, nesciunt laboriosam molestias voluptates?
-            Voluptates explicabo, libero optio ipsam quae expedita a corrupti
-            illum minima, quibusdam blanditiis. Odit id earum ullam veniam
-            nesciunt, quo optio iusto nam voluptatibus ipsa perspiciatis cumque
-            totam tempore modi nobis porro fugiat eligendi! Autem provident
-            minima omnis placeat consequuntur corporis magnam ratione eius,
-            molestias quibusdam sint illo labore debitis explicabo, possimus
-            fuga. Est, doloremque ipsam at neque unde qui molestiae vero in illo
-            libero, doloribus dolorum laudantium animi error eius amet, nobis
-            distinctio veritatis perspiciatis odio quos!
-          </p>
-        </div>
+        <PersonalInfo userData={userData} loading={loading} />
       </div>
     </div>
   );

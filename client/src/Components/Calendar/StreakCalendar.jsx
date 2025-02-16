@@ -7,7 +7,6 @@ import "./StreakCalendar.css";
 
 const StreakCalendar = () => {
   const [streak, setStreak] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchStreak = async (userId) => {
@@ -31,7 +30,6 @@ const StreakCalendar = () => {
       } else {
         setStreak([]);
       }
-      setLoading(false);
     });
 
     return () => unsubscribe();
@@ -55,7 +53,7 @@ const StreakCalendar = () => {
   console.log("yohoo", streak);
 
   return (
-    <div>
+    <div className="calendar-container">
       <CalendarUI streak={streak} tileClassName={tileClassName} />
     </div>
   );

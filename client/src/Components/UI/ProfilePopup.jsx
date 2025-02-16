@@ -20,7 +20,7 @@ const ProfilePopup = ({ handleLogout }) => {
     <Box position="relative">
       <Button
         onClick={() => setIsOpen(!isOpen)}
-        className="px-[1.5rem] py-[0.6rem] text-base font-bold text-[#0d2436] border-[1px] border-[#6CB33F] rounded-full bg-white hover:bg-green-50 transition ml-16"
+        className="px-[1.5rem] py-[0.6rem] text-base font-bold text-[#0d2436] border-[1px] border-[#6CB33F] rounded-full bg-white hover:bg-green-50 transition "
       >
         Menu
       </Button>

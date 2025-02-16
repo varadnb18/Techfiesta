@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { ChevronDownIcon, Box } from "@chakra-ui/icons";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ProfilePopup from "./ProfilePopup";
+import logo from "../../Images/logo.webp";
 
 function Title() {
   const [authToken, setAuthToken] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
@@ -28,7 +28,7 @@ function Title() {
     <div className="flex justify-around h-[4.7rem] items-center pt-7 mr-10 w-full">
       <div>
         <img
-          src="https://www.elitefitforyou.com/img/EFLogo.e7a7e136.png"
+          src={logo}
           alt="EliteFit Logo"
           className="max-h-[150px] aspect-[3/2] object-contain"
         />

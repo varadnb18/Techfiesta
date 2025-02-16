@@ -91,24 +91,24 @@ function SplitingWindow() {
   }, [userId, name]);
 
   return (
-    <SplitPane
-      split="vertical"
-      defaultSize="50%"
-      resizerStyle={{
-        background: "#ccc",
-        width: "5px",
-        cursor: "col-resize",
-      }}
-    >
-      <div className="bg-gray-100 h-full flex items-center justify-center">
-        {/* Left pane content */}
-        <h2 className="text-xl font-bold">{name} – Left Pane</h2>
-      </div>
-      <div className="bg-white h-full flex items-center justify-center">
-        {/* Right pane content */}
-        <h2 className="text-xl font-bold">{name} – Right Pane</h2>
-      </div>
-    </SplitPane>
+    <div className="h-screen w-full">
+      <SplitPane
+        split="vertical"
+        defaultSize="50%"
+        resizerStyle={{
+          background: "#ccc",
+          width: "5px",
+          cursor: "col-resize",
+        }}
+      >
+        <div className="bg-gray-100 h-full flex items-center justify-center">
+          <h2 className="text-xl ">Left Pane</h2>
+        </div>
+        <div className="bg-white h-full flex items-center justify-center">
+          <h2 className="text-xl">Right Pane</h2>
+        </div>
+      </SplitPane>
+    </div>
   );
 }
 
