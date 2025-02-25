@@ -3,6 +3,7 @@ import { ChevronDownIcon, Box } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import ProfilePopup from "./ProfilePopup";
 import logo from "../../Images/logo.webp";
+import "./Title.css";
 
 function Title() {
   const [authToken, setAuthToken] = useState(null);
@@ -30,20 +31,20 @@ function Title() {
         <img
           src={logo}
           alt="EliteFit Logo"
-          className="max-h-[150px] aspect-[3/2] object-contain"
+          className="logo max-h-[150px] aspect-[3/2] object-contain"
         />
       </div>
 
       <div>
-        <ul className="flex gap-9 font-medium">
+        <ul className="navbar flex justify-center gap-10 font-medium">
           {menuItems.map(({ name, path }) => (
             <li key={name}>
-              <Link to={path} className="flex items-center gap-1">
-                {name}
-                <Box as="button" aria-label="Dropdown">
-                  <ChevronDownIcon boxSize={5} />
-                </Box>
-              </Link>
+              <Box as="button" aria-label="Dropdown">
+                <Link to={path} className="flex items-center gap-1">
+                  {name}
+                  <ChevronDownIcon boxSize={5} className="translate-y-[2px]" />
+                </Link>
+              </Box>
             </li>
           ))}
         </ul>
@@ -53,7 +54,7 @@ function Title() {
         <ProfilePopup handleLogout={handleLogout} />
       ) : (
         <Link to="/Login-Page">
-          <button className="px-[1.5rem] py-[0.6rem] text-base font-bold text-[#0d2436] border-[1px] border-[#6CB33F] rounded-full bg-white hover:bg-green-50 transition ml-40">
+          <button className="signin px-[1.5rem] py-[0.6rem] text-base font-bold text-[#0d2436] border-[1px] border-[#6CB33F] rounded-full bg-white hover:bg-green-50 transition ml-40">
             Sign In
           </button>
         </Link>

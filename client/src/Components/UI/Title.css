@@ -1,0 +1,158 @@
+@media (max-width: 1500px) {
+  .title-container {
+    justify-content: space-between;
+    padding: 0 20px;
+  }
+
+  .logo {
+    max-height: 140px;
+  }
+  .navbar {
+    transform: translateX(70px);
+    gap: 60px;
+  }
+  .signin {
+    padding: 11px 25px;
+  }
+}
+
+@media (max-width: 1400px) {
+  .menu-items {
+    gap: 2rem;
+  }
+  .logo {
+    max-height: 120px;
+  }
+  .navbar {
+    transform: translateX(70px);
+    gap: 50px;
+  }
+}
+
+/* //--------------------------- */
+
+@media (max-width: 1300px) {
+  .menu-items {
+    gap: 2rem;
+  }
+  .logo {
+    max-height: 130px;
+  }
+  .navbar {
+    transform: translateX(70px);
+    gap: 50px;
+  }
+  .signin {
+    padding: 12px 25px;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 1200px) {
+  .signin {
+    transform: translateX(20px);
+  }
+  .navbar {
+    transform: translateX(100px);
+  }
+  .logo {
+    max-height: 115px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .logo {
+    max-height: 100px;
+  }
+  .navbar {
+    gap: 40px;
+    transform: translateX(105px);
+    font-size: 15px;
+  }
+  .signin {
+    transform: translateX(40px);
+    font-size: 13px;
+    padding: 9px 25px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .navbar {
+    gap: 40px;
+    transform: translateX(105px);
+    font-size: 15px;
+  }
+  .signin {
+    transform: translateX(40px);
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 900px) {
+  .logo {
+    max-height: 100px;
+  }
+  .navbar {
+    gap: 40px;
+    transform: translateX(120px);
+    font-size: 14px;
+  }
+  .signin {
+    transform: translateX(80px);
+    padding: 9px 25px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 800px) {
+  .logo {
+    max-height: 100px;
+  }
+  .navbar {
+    gap: 40px;
+    transform: translateX(120px);
+    font-size: 14px;
+  }
+  .signin {
+    transform: translateX(80px);
+    padding: 5px 25px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 700px) {
+  .menu-items {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .logo {
+    max-height: 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  .menu-items {
+    font-size: 0.9rem;
+  }
+  .logo {
+    max-height: 30px;
+  }
+}
+
+@media (max-width: 500px) {
+  .menu-items {
+    font-size: 0.8rem;
+  }
+  .logo {
+    max-height: 25px;
+  }
+}
+
+@media (max-width: 400px) {
+  .menu-items {
+    font-size: 0.7rem;
+  }
+  .logo {
+    max-height: 20px;
+  }
+}

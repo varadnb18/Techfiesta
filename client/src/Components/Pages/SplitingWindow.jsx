@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import SplitPane from "react-split-pane";
+import SplitPane, { Pane } from "split-pane-react";
+import "split-pane-react/esm/themes/default.css";
 import { auth, db } from "../FireBase/FireBase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 
@@ -10,6 +11,7 @@ function SplitingWindow() {
   const startTimeRef = useRef(Date.now());
   const totalStartTimeRef = useRef(Date.now());
   const screenStartTimeRef = useRef(Date.now());
+  const [sizes, setSizes] = useState([100, "30%", "auto"]);
 
   useEffect(() => {
     if (!userId) return;
@@ -91,22 +93,13 @@ function SplitingWindow() {
   }, [userId, name]);
 
   return (
-    <div className="h-screen w-full">
-      <SplitPane
-        split="vertical"
-        defaultSize="50%"
-        resizerStyle={{
-          background: "#ccc",
-          width: "5px",
-          cursor: "col-resize",
-        }}
-      >
-        <div className="bg-gray-100 h-full flex items-center justify-center">
-          <h2 className="text-xl ">Left Pane</h2>
-        </div>
-        <div className="bg-white h-full flex items-center justify-center">
-          <h2 className="text-xl">Right Pane</h2>
-        </div>
+    <div style={{ height: "full" }}>
+      <SplitPane split="vertical" sizes={sizes} onChange={setSizes}>
+        <Pane minSize={60} maxSize="50%">
+          <div style={{ background: "#ddd", height: "100%" }}>Pane 1</div>
+        </Pane>
+
+        <div style={{ background: "#a1a5a9", height: "100%" }}>Pane 2</div>
       </SplitPane>
     </div>
   );

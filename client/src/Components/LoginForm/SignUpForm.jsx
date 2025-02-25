@@ -22,10 +22,9 @@ const SignUpForm = ({ handleFocus, handleBlur, toggleForm, setPage }) => {
         <div className="input-wrap">
           <input
             type="text"
-            minLength="4"
             name="username"
             value={signup.username}
-            className="input-field"
+            className={`input-field ${signup.username ? "active" : ""}`}
             autoComplete="off"
             required
             onFocus={handleFocus}
@@ -39,7 +38,7 @@ const SignUpForm = ({ handleFocus, handleBlur, toggleForm, setPage }) => {
           <input
             type="email"
             name="email"
-            className="input-field"
+            className={`input-field ${signup.email ? "active" : ""}`}
             value={signup.email}
             autoComplete="off"
             required
@@ -55,7 +54,7 @@ const SignUpForm = ({ handleFocus, handleBlur, toggleForm, setPage }) => {
             type="password"
             name="password"
             minLength="4"
-            className="input-field"
+            className={`input-field ${signup.password ? "active" : ""}`}
             value={signup.password}
             autoComplete="off"
             required

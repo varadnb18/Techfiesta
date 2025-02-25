@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../FireBase/FireBase";
 import { doc, setDoc } from "firebase/firestore";
-import { useSignup } from "./SignupContext"; // Use the context hook
+import { useSignup } from "./SignupContext";
 
 const SignUpNext = ({ handleFocus, handleBlur, toggleForm, setPage }) => {
   const navigate = useNavigate();
@@ -44,11 +44,9 @@ const SignUpNext = ({ handleFocus, handleBlur, toggleForm, setPage }) => {
         });
       }
 
-      // Get the ID token
       const token = await user.getIdToken();
       localStorage.setItem("authToken", token);
 
-      // Reset the signup state
       setSignup({
         username: "",
         email: "",
@@ -98,7 +96,7 @@ const SignUpNext = ({ handleFocus, handleBlur, toggleForm, setPage }) => {
         <div className="input-wrap">
           <select
             name="Gender"
-            className="input-field"
+            className={`input-field ${signup.Gender ? "active" : ""}`}
             value={signup.Gender}
             onFocus={handleFocus}
             onBlur={handleBlur}
@@ -117,7 +115,7 @@ const SignUpNext = ({ handleFocus, handleBlur, toggleForm, setPage }) => {
           <input
             type="text"
             name="heightWeight"
-            className="input-field"
+            className={`input-field ${signup.heightWeight ? "active" : ""}`}
             value={signup.heightWeight}
             onFocus={handleFocus}
             onBlur={handleBlur}
