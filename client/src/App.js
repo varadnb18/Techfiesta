@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 // import Header from "./Components/Header/Header";
 import LoginPage from "./Components/LoginForm/LoginPage";
 import NotFound from "./Components/UI/NotFoundPage";
@@ -10,11 +10,19 @@ import SplitingWindow from "./Components/Pages/SplitingWindow";
 import NewFP from "./Components/Pages/NewFP";
 import ProtectedRoute from "./ProtectedRoute";
 
+const isAuthenticated = () => {
+  return localStorage.getItem("authToken") !== null;
+};
+
 function App() {
   return (
     <Routes>
       <Route path="/" element={<NewFP />} />
-      <Route path="/Login-Page" element={<LoginPage />} />
+
+      <Route
+        path="/Login-Page"
+        element={isAuthenticated() ? <Navigate to="/" /> : <LoginPage />}
+      />
 
       {/* Protected Routes */}
       <Route

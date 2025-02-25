@@ -28,8 +28,8 @@ const ProfilePopup = ({ handleLogout }) => {
       {isOpen && (
         <Box
           position="absolute"
-          top="50px"
-          right="0"
+          top="85px"
+          right="36"
           w="250px"
           bg="white"
           color="black"

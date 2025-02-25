@@ -57,7 +57,7 @@ const SignInForm = ({ handleFocus, handleBlur, toggleForm }) => {
         <div className="input-wrap">
           <input
             type="email"
-            className="input-field"
+            className={`input-field ${signin.email ? "active" : ""}`}
             name="email"
             value={signin.email}
             required
@@ -71,7 +71,7 @@ const SignInForm = ({ handleFocus, handleBlur, toggleForm }) => {
         <div className="input-wrap">
           <input
             type="password"
-            className="input-field"
+            className={`input-field ${signin.password ? "active" : ""}`}
             name="password"
             value={signin.password}
             required

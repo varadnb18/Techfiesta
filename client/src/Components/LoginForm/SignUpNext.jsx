@@ -13,17 +13,35 @@ const SignUpNext = ({ handleFocus, handleBlur, toggleForm, setPage }) => {
   async function handleSubmit(event) {
     event.preventDefault();
 
+    console.log("Signup Data:", signup);
+
     const { username, email, password, heightWeight, DOB, Gender } = signup;
-    const [height, weight] = heightWeight
-      .split(" / ")
-      .map((value) => parseInt(value.trim()));
+
+    let height = null,
+      weight = null;
+    if (heightWeight && heightWeight.includes("/")) {
+      const parts = heightWeight.split("/");
+      if (parts.length === 2) {
+        height = parseInt(parts[0].trim());
+        weight = parseInt(parts[1].trim());
+      }
+    }
+
+    if (
+      !username ||
+      !email ||
+      !password ||
+      !DOB ||
+      !Gender ||
+      !height ||
+      !weight
+    ) {
+      console.log("⚠️ Missing fields detected!");
+      alert("Please fill in all fields correctly.");
+      return;
+    }
 
     try {
-      if (!email || !password || !height || !weight || !username) {
-        console.log("Missing fields!");
-        return;
-      }
-
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
@@ -31,16 +49,16 @@ const SignUpNext = ({ handleFocus, handleBlur, toggleForm, setPage }) => {
       );
       const user = userCredential.user;
 
-      console.log("User registered successfully!", user);
+      console.log("✅ User registered successfully!", user);
 
       if (user) {
         await setDoc(doc(db, "users", user.uid), {
-          username: username,
-          email: user.email,
+          username,
+          email,
           date_of_birth: DOB,
           gender: Gender,
-          height: height,
-          weight: weight,
+          height,
+          weight,
         });
       }
 
@@ -56,9 +74,12 @@ const SignUpNext = ({ handleFocus, handleBlur, toggleForm, setPage }) => {
         heightWeight: "",
       });
 
+      alert("SignUp Successful");
+
       navigate("/");
     } catch (err) {
-      console.log("Error during sign up:", err.message);
+      console.log("🔥 Error during sign-up:", err.message);
+      alert("Sign-up failed: " + err.message);
     }
   }
 
@@ -122,7 +143,7 @@ const SignUpNext = ({ handleFocus, handleBlur, toggleForm, setPage }) => {
             onChange={handleChange}
             required
           />
-          <label>Height/Weight (e.g., 170cm / 70kg)</label>
+          <label>Height/Weight (e.g., 170 / 70)</label>
         </div>
 
         <div className="submit-btn">
