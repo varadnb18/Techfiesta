@@ -13,6 +13,14 @@ function SplitingWindow() {
   const screenStartTimeRef = useRef(Date.now());
   const [sizes, setSizes] = useState([100, "30%", "auto"]);
 
+  const handleSizeChange = (newSizes) => {
+    if (newSizes.length === sizes.length) {
+      setSizes(newSizes);
+    } else {
+      console.warn("Sizes array structure changed, ignoring update.");
+    }
+  };
+
   useEffect(() => {
     if (!userId) return;
 
@@ -92,7 +100,7 @@ function SplitingWindow() {
 
   return (
     <div style={{ height: "100vh", width: "100vw" }}>
-      <SplitPane split="vertical" sizes={sizes} onChange={setSizes}>
+      <SplitPane split="vertical" sizes={sizes} onChange={handleSizeChange}>
         <div style={{ background: "#ddd", height: "100%" }}>Pane 1</div>
         <div style={{ background: "#a1a5a9", height: "100%" }}>Pane 2</div>
       </SplitPane>
