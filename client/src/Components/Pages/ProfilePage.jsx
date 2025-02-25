@@ -17,7 +17,7 @@ const StatBox = ({ number, label }) => (
 function ProfilePage() {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [stats, setStats] = useState({
+  const [stats] = useState({
     totalSessions: 0,
     totalVisitors: 0,
     newVisitors: 0,

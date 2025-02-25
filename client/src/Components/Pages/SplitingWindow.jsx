@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import SplitPane, { Pane } from "split-pane-react";
+import SplitPane from "split-pane-react";
 import "split-pane-react/esm/themes/default.css";
 import { auth, db } from "../FireBase/FireBase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
@@ -20,7 +20,6 @@ function SplitingWindow() {
       const endTime = Date.now();
       const durationInMs = endTime - startTimeRef.current;
       const durationInMinutes = Math.floor(durationInMs / 60000);
-
       if (durationInMinutes === 0) return;
 
       const today = new Date().toISOString().split("T")[0];
@@ -31,7 +30,6 @@ function SplitingWindow() {
 
         if (userDoc.exists()) {
           const userData = userDoc.data();
-
           const currentExerciseTime = userData.exerciseTime?.[name] || {};
           const updatedMinutes =
             (currentExerciseTime[today] || 0) + durationInMinutes;
@@ -93,12 +91,9 @@ function SplitingWindow() {
   }, [userId, name]);
 
   return (
-    <div style={{ height: "full" }}>
+    <div style={{ height: "100vh", width: "100vw" }}>
       <SplitPane split="vertical" sizes={sizes} onChange={setSizes}>
-        <Pane minSize={60} maxSize="50%">
-          <div style={{ background: "#ddd", height: "100%" }}>Pane 1</div>
-        </Pane>
-
+        <div style={{ background: "#ddd", height: "100%" }}>Pane 1</div>
         <div style={{ background: "#a1a5a9", height: "100%" }}>Pane 2</div>
       </SplitPane>
     </div>
