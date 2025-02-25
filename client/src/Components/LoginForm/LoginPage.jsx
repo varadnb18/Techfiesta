@@ -4,28 +4,12 @@ import SignUpForm from "./SignUpForm";
 import Carousel from "./Carousel";
 import SignUpNext from "./SignUpNext";
 import "./LoginPage.css";
+import { SignupProvider } from "./SignupContext"; // Import the provider
 
 const LoginPage = () => {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
   const [activeBullet, setActiveBullet] = useState(1);
   const [page, setPage] = useState(0);
-
-  const [signup, setSignup] = useState({
-    username: "",
-    email: "",
-    password: "",
-    DOB: "",
-    Gender: "",
-    heightWeight: "",
-  });
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setSignup((prevSignup) => ({
-      ...prevSignup,
-      [name]: value,
-    }));
-  };
 
   const handleFocus = (e) => {
     e.target.classList.add("active");
@@ -50,8 +34,6 @@ const LoginPage = () => {
       case 0:
         return (
           <SignUpForm
-            signup={signup}
-            handleChange={handleChange}
             setPage={setPage}
             handleFocus={handleFocus}
             handleBlur={handleBlur}
@@ -61,13 +43,10 @@ const LoginPage = () => {
       case 1:
         return (
           <SignUpNext
-            signup={signup}
-            handleChange={handleChange}
             setPage={setPage}
             handleFocus={handleFocus}
             handleBlur={handleBlur}
             toggleForm={toggleForm}
-            setSignup={setSignup}
           />
         );
       default:
@@ -84,15 +63,17 @@ const LoginPage = () => {
       <div className="box">
         <div className="inner-box">
           <div className="forms-wrap">
-            {!isSignUpMode && (
-              <SignInForm
-                handleFocus={handleFocus}
-                handleBlur={handleBlur}
-                toggleForm={toggleForm}
-              />
-            )}
-
-            {isSignUpMode && PageDisplay()}
+            {/* Wrap forms that need signup state with the provider */}
+            <SignupProvider>
+              {!isSignUpMode && (
+                <SignInForm
+                  handleFocus={handleFocus}
+                  handleBlur={handleBlur}
+                  toggleForm={toggleForm}
+                />
+              )}
+              {isSignUpMode && PageDisplay()}
+            </SignupProvider>
           </div>
           <Carousel activeBullet={activeBullet} moveSlider={moveSlider} />
         </div>

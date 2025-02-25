@@ -1,27 +1,19 @@
 import React from "react";
 import Logo from "./Logo";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../FireBase/FireBase";
 import { doc, setDoc } from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
+import { useSignup } from "./SignupContext"; // Use the context hook
 
-const SignUpNext = ({
-  handleFocus,
-  handleBlur,
-  toggleForm,
-  setPage,
-  signup,
-  handleChange,
-  setSignup,
-}) => {
+const SignUpNext = ({ handleFocus, handleBlur, toggleForm, setPage }) => {
   const navigate = useNavigate();
+  const { signup, setSignup, handleChange } = useSignup();
 
   async function handleSubmit(event) {
     event.preventDefault();
 
     const { username, email, password, heightWeight, DOB, Gender } = signup;
-
     const [height, weight] = heightWeight
       .split(" / ")
       .map((value) => parseInt(value.trim()));
@@ -54,10 +46,9 @@ const SignUpNext = ({
 
       // Get the ID token
       const token = await user.getIdToken();
-
-      // Store the token in localStorage (or a cookie if preferred)
       localStorage.setItem("authToken", token);
 
+      // Reset the signup state
       setSignup({
         username: "",
         email: "",
@@ -138,12 +129,14 @@ const SignUpNext = ({
 
         <div className="submit-btn">
           <input
+            type="button"
             value="Prev"
             className="sign-btn"
             onClick={() => {
               setPage((currpage) => currpage - 1);
             }}
           />
+
           <input type="submit" value="Sign Up" className="sign-btn" />
         </div>
 

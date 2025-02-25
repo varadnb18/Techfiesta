@@ -1,15 +1,12 @@
 import React from "react";
 import Logo from "./Logo";
 import { Link } from "react-router-dom";
+import { useSignup } from "./SignupContext"; // Import the custom hook
 
-const SignUpForm = ({
-  handleFocus,
-  handleBlur,
-  toggleForm,
-  setPage,
-  signup,
-  handleChange,
-}) => {
+const SignUpForm = ({ handleFocus, handleBlur, toggleForm, setPage }) => {
+  // Consume signup state and handler from context
+  const { signup, handleChange } = useSignup();
+
   return (
     <form action="index.html" autoComplete="off" className="sign-up-form">
       <Logo />
@@ -69,12 +66,14 @@ const SignUpForm = ({
           <label>Password</label>
         </div>
         <input
+          type="button"
           value="Next"
           className="sign-btn"
           onClick={() => {
             setPage((currpage) => currpage + 1);
           }}
         />
+
         <p className="text">
           By signing up, I agree to the
           <Link to="#">Terms of Services</Link> and
