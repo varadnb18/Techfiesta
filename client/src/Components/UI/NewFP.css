@@ -1,0 +1,264 @@
+/* 1400px and below */
+
+@media (max-width: 93.75rem) {
+  .element .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+  .element h1 {
+    font-size: 3rem;
+    margin-left: 1.875rem;
+  }
+  .element p {
+    font-size: 1.2rem;
+    margin-left: 1.875rem;
+  }
+
+  .demo {
+    margin-left: 1.875rem;
+  }
+  .element iframe {
+    width: 39.375rem;
+    height: 33.125rem;
+  }
+  .video {
+    transform: translateX(4.375rem) translateY(1.875rem);
+  }
+}
+
+@media (max-width: 87.5rem) {
+  .element iframe {
+    width: 38.125rem;
+    height: 31.875rem;
+  }
+  .video {
+    transform: translateX(4.6875rem) translateY(1.875rem);
+  }
+  .image-container {
+    transform: translateX(-0.625rem);
+  }
+}
+
+@media (max-width: 81.25rem) {
+  .element iframe {
+    width: 36.875rem;
+    height: 30.625rem;
+  }
+  .area {
+    transform: translateX(1.5625rem) translateY(-3.125rem);
+  }
+  .image-container {
+    transform: translateX(1.875rem);
+  }
+  .video {
+    transform: translateX(1.25rem) translateY(1.875rem);
+  }
+  .demo {
+    padding: 1rem 1.375rem;
+  }
+}
+
+@media (max-width: 75rem) {
+  .element iframe {
+    width: 34.375rem;
+    height: 28.125rem;
+  }
+  .area {
+    transform: translateX(1.5625rem) translateY(-3.75rem);
+  }
+  .image-container {
+    transform: translateX(4.375rem);
+  }
+  .video {
+    transform: translateX(0) translateY(1.875rem);
+  }
+}
+
+@media (max-width: 68.75rem) {
+  .A {
+    font-size: 3.6rem;
+  }
+  .word {
+    font-size: 3.6rem;
+  }
+  .element h1 {
+    font-size: 2.7rem;
+    margin-left: 1.875rem;
+  }
+  .element p {
+    font-size: 1.1rem;
+    margin-left: 1.875rem;
+  }
+
+  .element iframe {
+    width: 31.875rem;
+    height: 25.625rem;
+  }
+  .area {
+    transform: translateX(-0.9375rem) translateY(-4.375rem);
+  }
+  .image-container {
+    transform: translateY(0) translateX(5.3125rem);
+  }
+  .video {
+    transform: translateX(-2.5rem) translateY(1.875rem);
+  }
+  .demo {
+    padding: 0.875rem 1.25rem;
+  }
+}
+
+@media (max-width: 62.5rem) {
+  .A {
+    font-size: 3.3rem;
+  }
+  .word {
+    font-size: 3.3rem;
+  }
+  .element h1 {
+    font-size: 2.6rem;
+    margin-left: 1.875rem;
+  }
+  .element p {
+    font-size: 1rem;
+    margin-left: 1.875rem;
+  }
+  .element iframe {
+    width: 29.375rem;
+    height: 23.125rem;
+  }
+  .area {
+    transform: translateX(-1rem) translateY(-4.375rem);
+  }
+  .video {
+    transform: translateX(-4.5rem) translateY(1.875rem);
+  }
+  .image-container {
+    transform: translateY(0) translateX(7.5rem);
+  }
+}
+
+@media (max-width: 56.25rem) {
+  .element iframe {
+    width: 26.875rem;
+    height: 20.625rem;
+  }
+  .area {
+    transform: translateX(-2rem) translateY(-3.125rem);
+  }
+
+  .image-container {
+    transform: translateX(10.5rem);
+  }
+
+  .video {
+    transform: translateX(-5.8rem) translateY(5rem);
+  }
+}
+
+@media (max-width: 50rem) {
+  .A {
+    font-size: 3.3rem;
+  }
+  .word {
+    font-size: 3.3rem;
+  }
+  .element h1 {
+    font-size: 2.2rem;
+    margin-left: 1.875rem;
+  }
+  .element p {
+    font-size: 0.8rem;
+    margin-left: 1.875rem;
+  }
+  .element iframe {
+    width: 25rem;
+    height: 18.125rem;
+  }
+  .video {
+    transform: translateX(-9rem) translateY(5rem);
+  }
+  .area {
+    transform: translateX(-3.4rem) translateY(-3.125rem);
+  }
+  .image-container {
+    transform: translateX(11rem);
+  }
+}
+
+@media (max-width: 43.75rem) {
+  .grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .element {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .area {
+    transform: translateX(0) translateY(0rem); /* Center horizontally */
+  }
+
+  .demo {
+    transform: translateX(-2rem);
+  }
+
+  .A,
+  .word,
+  .element h1,
+  .element p {
+    text-align: justify; /* Center text */
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .element p {
+    font-size: 0.9rem;
+  }
+
+  .element iframe {
+    width: 25rem;
+    height: 18rem;
+  }
+
+  .video {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    transform: translateX(0) translateY(-9rem);
+    margin: 0 auto;
+  }
+
+  /* .area {
+    transform: translateX(-1.25rem) translateY(2.5rem);
+  } */
+
+  .image-container {
+    display: none;
+  }
+}
+
+@media (max-width: 37.5rem) {
+  .element iframe {
+    width: 25rem;
+    height: 15.625rem;
+  }
+}
+
+@media (max-width: 31.25rem) {
+  .element iframe {
+    width: 25rem;
+    height: 15.625rem;
+  }
+}
+
+@media (max-width: 25rem) {
+  .element iframe {
+    width: 25rem;
+    height: 15.625rem;
+  }
+}

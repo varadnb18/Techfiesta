@@ -1,8 +1,8 @@
 import React from "react";
-import Title from "../UI/Title";
-import "./Pages.css";
+import Title from "./Title";
 import varad from "../../Images/varad.webp";
 import "./NewFP.css";
+import "../Pages/Pages.css";
 
 function NewFP() {
   return (

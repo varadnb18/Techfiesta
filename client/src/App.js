@@ -7,7 +7,7 @@ import "./index.css";
 import SecondPage from "./Components/Pages/SecondPage";
 import ProfilePage from "./Components/Pages/ProfilePage";
 import SplitingWindow from "./Components/Pages/SplitingWindow";
-import NewFP from "./Components/Pages/NewFP";
+import FrontPage from "./Components/Pages/FrontPage";
 import ProtectedRoute from "./ProtectedRoute";
 
 const isAuthenticated = () => {
@@ -17,7 +17,7 @@ const isAuthenticated = () => {
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<NewFP />} />
+      <Route path="/" element={<FrontPage />} />
 
       <Route
         path="/Login-Page"

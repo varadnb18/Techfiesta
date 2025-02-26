@@ -8,9 +8,9 @@ import {
   Badge,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Title.css";
+import "./ProfilePopup.css";
 
 const ProfilePopup = ({ handleLogout }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,59 +18,61 @@ const ProfilePopup = ({ handleLogout }) => {
   const navigate = useNavigate();
 
   return (
-    <Box position="signin relative">
+    <Box position="relative" display="inline-block">
       <Button
         onClick={() => setIsOpen(!isOpen)}
-        className=" text-base px-[1.5rem] py-[0.7rem] font-bold text-[#0d2436] border-[1px] border-[#6CB33F] rounded-full bg-white hover:bg-green-50 transition "
+        className="signin px-[1.5rem] py-[0.6rem] text-base font-bold text-[#0d2436] border-[1px] border-[#6CB33F] rounded-full bg-white hover:bg-green-50 transition ml-40"
       >
         Menu
       </Button>
       {isOpen && (
         <Box
           position="absolute"
-          top="85px"
-          right="36"
-          w="250px"
+          top="110%"
+          width={{ base: "90%", md: "16rem" }} // Adjust width for smaller screens
+          height="auto"
           bg="white"
           color="black"
           borderRadius="md"
           boxShadow="lg"
-          p={2}
+          padding={3}
+          zIndex="10"
+          className="popupbox"
         >
-          <VStack align="stretch" spacing={1}>
-            <HStack justifyContent="space-between" px={3} py={2}>
+          <VStack align="stretch" spacing={2}>
+            <HStack justifyContent="space-between" paddingX={3} paddingY={2}>
               <Text fontWeight="bold">Messages</Text>
               <Badge colorScheme="red">1 unread</Badge>
             </HStack>
             <Link to="/Profile">
               <Text
-                px={3}
-                py={2}
+                paddingX={3}
+                paddingY={2}
                 _hover={{ bg: "gray.100", cursor: "pointer" }}
                 fontWeight="bold"
               >
                 Profile
               </Text>
             </Link>
-            <Text px={3} py={2} _hover={{ bg: "gray.100", cursor: "pointer" }}>
-              Varad
-            </Text>
-            <Divider />
-            <Text px={3} py={2} _hover={{ bg: "gray.100", cursor: "pointer" }}>
-              Varad
-            </Text>
-            <Text px={3} py={2} _hover={{ bg: "gray.100", cursor: "pointer" }}>
+            <Text
+              paddingX={3}
+              paddingY={2}
+              _hover={{ bg: "gray.100", cursor: "pointer" }}
+            >
               Varad
             </Text>
 
-            <Divider />
-            <Text px={3} py={2} _hover={{ bg: "gray.100", cursor: "pointer" }}>
+            <Text
+              paddingX={3}
+              paddingY={2}
+              _hover={{ bg: "gray.100", cursor: "pointer" }}
+            >
               Help Centre
             </Text>
 
             <Text
-              px={3}
-              py={2}
+              paddingX={3}
+              paddingY={2}
               _hover={{ bg: "gray.100", cursor: "pointer" }}
               color="red.500"
               onClick={() => {
