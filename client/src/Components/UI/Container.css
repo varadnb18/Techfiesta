@@ -1,0 +1,85 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 0 1.75rem;
+  place-items: center;
+}
+
+/* 1500px (93.75rem) */
+@media (max-width: 93.75rem) {
+}
+
+/* 1400px (87.5rem) */
+@media (max-width: 87.5rem) {
+}
+
+/* 1300px (81.25rem) */
+@media (max-width: 81.25rem) {
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 1200px (75rem) */
+@media (max-width: 75rem) {
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 1100px (68.75rem) */
+@media (max-width: 68.75rem) {
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 1000px (62.5rem) */
+@media (max-width: 62.5rem) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 900px (56.25rem) */
+@media (max-width: 56.25rem) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 800px (50rem) */
+@media (max-width: 50rem) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 700px (43.75rem) */
+@media (max-width: 43.75rem) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 600px (37.5rem) */
+@media (max-width: 37.5rem) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 500px (31.25rem) */
+@media (max-width: 31.25rem) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 400px (25rem) */
+@media (max-width: 25rem) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
