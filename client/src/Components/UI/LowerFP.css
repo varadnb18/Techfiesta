@@ -1,0 +1,370 @@
+/* Base Styles */
+.lower-fp-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: white;
+}
+
+.lower-fp-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: white;
+  width: 85%;
+}
+
+.lower-fp-image {
+  position: relative;
+  max-width: 25rem;
+  margin: 0 2rem;
+}
+
+.lower-fp-image img {
+  border-radius: 0.5rem;
+  height: 31.25rem;
+  width: 100%;
+  object-fit: contain;
+}
+
+.lower-fp-content {
+  display: flex;
+  flex-direction: column;
+  margin: 0 2rem;
+  max-width: 32.5rem;
+  /* Note: If you intended a top margin, add it separately */
+}
+
+.lower-fp-content h2 {
+  font-size: 2.3rem;
+  font-weight: bold;
+  margin-bottom: 1.25rem;
+}
+
+.lower-fp-feature {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1.25rem 0.75rem;
+}
+
+.lower-fp-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  padding: 0.25rem;
+  border-radius: 50%;
+}
+
+.lower-fp-icon img {
+  width: 2.5rem;
+}
+
+.lower-fp-feature div h3 {
+  font-size: 1.2rem;
+}
+
+.lower-fp-feature div p {
+  font-size: 1rem;
+  color: gray;
+}
+
+.lower-fp-content button {
+  margin-top: 1.5rem;
+  background-color: #1f2937;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 0.75rem;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.lower-fp-content button:hover {
+  background-color: #374151;
+}
+
+/* Media Queries */
+
+/* 1600px and below */
+@media (max-width: 1600px) {
+  .lower-fp-wrapper {
+    width: 90%;
+  }
+  .lower-fp-icon {
+    width: 3.25rem;
+    height: 3.25rem;
+  }
+  .lower-fp-icon img {
+    width: 2.25rem;
+  }
+  .lower-fp-content {
+    transform: translateY(4rem);
+  }
+  .STUDIES {
+    width: 14.7rem;
+  }
+}
+
+/* 1400px and below */
+@media (max-width: 1400px) {
+  .lower-fp-image {
+    max-width: 23rem;
+  }
+  .lower-fp-content {
+    transform: translateY(4.1rem);
+  }
+  .lower-fp-content h2 {
+    font-size: 2.2rem;
+  }
+}
+
+/* 1300px and below */
+@media (max-width: 1300px) {
+  .lower-fp-content {
+    max-width: 30rem;
+    transform: translateY(4rem);
+  }
+  .lower-fp-content h2 {
+    font-size: 2rem;
+  }
+  .lower-fp-feature div p {
+    font-size: 0.9rem;
+  }
+}
+
+/* 1200px and below */
+@media (max-width: 1200px) {
+  .lower-fp-image {
+    max-width: 20rem;
+  }
+  .lower-fp-content h2 {
+    font-size: 1.9rem;
+  }
+  .STUDIES {
+    width: 13.3rem;
+    font-size: 0.85rem;
+  }
+  .lower-fp-content {
+    transform: translateX(1rem) translateY(4.7rem);
+  }
+}
+
+/* 1100px and below */
+@media (max-width: 1100px) {
+  .lower-fp-content h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+  .lower-fp-feature div h3 {
+    font-size: 1.1rem;
+  }
+  .lower-fp-feature div p {
+    font-size: 0.95rem;
+  }
+  .lower-fp-image {
+    max-width: 19rem;
+  }
+  .lower-fp-content {
+    transform: translateX(1.5rem) translateY(5.5rem);
+  }
+  .lower-fp-wrapper {
+    width: 95%;
+    transform: translateY(-2rem);
+  }
+}
+
+/* 1000px and below */
+@media (max-width: 1000px) {
+  .lower-fp-image {
+    max-width: 18rem;
+  }
+  .STUDIES {
+    width: 11.5rem;
+    font-size: 0.7rem;
+  }
+  .lower-fp-content {
+    max-width: 28rem;
+    transform: translateY(6rem);
+  }
+  .lower-fp-content h2 {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+  }
+  .lower-fp-feature div p {
+    font-size: 0.8rem;
+  }
+  .lower-fp-feature div h3 {
+    font-size: 1rem;
+  }
+  .lower-fp-feature {
+    margin-top: 15px;
+  }
+  .lower-fp-icon {
+    width: 3rem;
+    height: 3rem;
+  }
+  .lower-fp-icon img {
+    width: 2rem;
+  }
+}
+
+/* 900px and below */
+@media (max-width: 900px) {
+  .lower-fp-content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+  .lower-fp-image {
+    max-width: 16.5rem;
+  }
+  .STUDIES {
+    width: 11.5rem;
+    font-size: 0.7rem;
+  }
+  .lower-fp-content {
+    transform: translateY(6.54rem);
+  }
+  .lower-fp-feature div p {
+    font-size: 0.9rem;
+  }
+  .lower-fp-feature div h3 {
+    font-size: 1.1rem;
+  }
+  .lower-fp-wrapper {
+    transform: translateY(-4rem);
+  }
+}
+
+/* 800px and below */
+@media (max-width: 800px) {
+  .lower-fp-content {
+    max-width: 28rem;
+    transform: translateY(7.5rem);
+  }
+  .lower-fp-container {
+    transform: translateY(-15rem);
+  }
+  .lower-fp-image {
+    max-width: 14rem;
+  }
+  .lower-fp-content h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  .lower-fp-feature div p {
+    font-size: 0.8rem;
+  }
+  .lower-fp-feature div h3 {
+    font-size: 1rem;
+  }
+  .lower-fp-feature {
+    margin-top: 10px;
+  }
+  .lower-fp-icon {
+    width: 3rem;
+    height: 3rem;
+  }
+  .lower-fp-icon img {
+    width: 2rem;
+  }
+  .STUDIES {
+    width: 10.4rem;
+    font-size: 0.6rem;
+    margin-top: 15px !important;
+  }
+  .lower-fp-wrapper {
+    transform: translateY(-4rem);
+  }
+}
+
+/* 700px and below - switch to vertical layout and contain content */
+@media (max-width: 700px) {
+  .lower-fp-container {
+    transform: translateY(1rem);
+  }
+  .lower-fp-wrapper {
+    flex-direction: column-reverse;
+    align-items: center;
+    width: 100%;
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+  .lower-fp-image {
+    max-width: 20rem;
+    margin-top: 3rem;
+    box-sizing: border-box;
+    transform: translateY(-2rem);
+  }
+  .lower-fp-content {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0 1rem;
+    align-items: center;
+    box-sizing: border-box;
+    transform: translateY(1rem);
+  }
+  .lower-fp-icon {
+    width: 3rem;
+    height: 3rem;
+  }
+  .lower-fp-feature img {
+    width: 2rem;
+  }
+
+  .lower-fp-feature {
+    width: 28rem;
+  }
+
+  .lower-fp-content h2 {
+    font-size: 1.7rem;
+    margin-bottom: 15px;
+  }
+  .lower-fp-feature div p {
+    font-size: 0.8rem;
+  }
+  .lower-fp-feature div h3 {
+    font-size: 1rem;
+  }
+}
+
+/* 600px and below */
+@media (max-width: 600px) {
+  .lower-fp-image {
+    max-width: 20rem;
+  }
+
+  .lower-fp-wrapper {
+    transform: translateY(-1rem);
+  }
+}
+
+/* 500px and below */
+@media (max-width: 500px) {
+  .lower-fp-content h2 {
+    font-size: 1.4rem;
+  }
+  .lower-fp-feature {
+    width: 23rem;
+  }
+}
+
+/* 400px and below */
+@media (max-width: 400px) {
+  .lower-fp-content {
+    max-width: 25rem;
+  }
+  .lower-fp-feature {
+    width: 20rem;
+  }
+  .lower-fp-content h2 {
+    font-size: 1.1rem;
+  }
+
+  .lower-fp-wrapper {
+    transform: translateY(2rem);
+  }
+}

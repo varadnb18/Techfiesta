@@ -26,7 +26,7 @@ function Title() {
   ];
 
   return (
-    <div className="flex justify-around h-[4.7rem] items-center pt-7 mr-10 w-full">
+    <div className="title flex justify-around h-[4.7rem] items-center pt-7 w-full">
       <div>
         <img
           src={logo}

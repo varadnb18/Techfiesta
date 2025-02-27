@@ -8,7 +8,7 @@ const BottomFP = () => {
       <div className="bottomfp-wrapper flex justify-between bg-white w-[85%]">
         {/* Right Section - Content */}
         <div className="bottomfp-content flex flex-col ml-10 max-w-[520px]">
-          <h2 className="bottomfp-title text-[2rem] font-bold mb-5">
+          <h2 className="bottomfp-title text-[2.3rem] font-bold mb-5">
             AI Solutions for Precision and Customization
           </h2>
 
@@ -20,10 +20,10 @@ const BottomFP = () => {
               />
             </div>
             <div>
-              <h3 className="bottomfp-heading font-bold text-[1.3rem]">
+              <h3 className="bottomfp-heading font-bold text-[1.2rem]">
                 Motion Tracking: Differentiate Yourself
               </h3>
-              <p className="bottomfp-text text-md text-gray-600 text-[1.1rem]">
+              <p className="bottomfp-text text-md text-gray-600 text-[1rem]">
                 Using AI to improve compliance, adherence & outcomes.
               </p>
             </div>
@@ -40,13 +40,13 @@ const BottomFP = () => {
               <h3 className="bottomfp-heading font-bold text-[1.2rem]">
                 Integration: Unlimited Content
               </h3>
-              <p className="bottomfp-text text-md text-gray-600 text-[1.1rem]">
+              <p className="bottomfp-text text-md text-gray-600 text-[1rem]">
                 Use your content with our API + SDK integration.
               </p>
             </div>
           </div>
           <div>
-            <button className="bottomfp-text mt-6 bg-gray-800 text-white px-7 py-4 rounded-xl hover:bg-gray-700 font-bold">
+            <button className="STUDIES mt-6 bg-gray-800 text-white px-7 py-4 rounded-xl hover:bg-gray-700 font-bold">
               VIEW CASE STUDIES &gt;
             </button>
           </div>

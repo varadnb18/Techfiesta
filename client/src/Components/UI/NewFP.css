@@ -1,10 +1,6 @@
 /* 1400px and below */
 
 @media (max-width: 93.75rem) {
-  .element .grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 1.25rem;
-  }
   .element h1 {
     font-size: 3rem;
     margin-left: 1.875rem;
@@ -22,7 +18,10 @@
     height: 33.125rem;
   }
   .video {
-    transform: translateX(4.375rem) translateY(1.875rem);
+    transform: translateX(-2rem);
+  }
+  .element {
+    height: 47rem;
   }
 }
 
@@ -31,11 +30,12 @@
     width: 38.125rem;
     height: 31.875rem;
   }
-  .video {
-    transform: translateX(4.6875rem) translateY(1.875rem);
-  }
   .image-container {
     transform: translateX(-0.625rem);
+  }
+  .video {
+    transform: translateX(-2rem);
+    width: 38.125rem;
   }
 }
 
@@ -45,16 +45,23 @@
     height: 30.625rem;
   }
   .area {
-    transform: translateX(1.5625rem) translateY(-3.125rem);
+    transform: translateX(0rem) translateY(-2.5rem);
   }
   .image-container {
-    transform: translateX(1.875rem);
+    transform: translateX(1.3rem);
   }
-  .video {
-    transform: translateX(1.25rem) translateY(1.875rem);
-  }
+
   .demo {
     padding: 1rem 1.375rem;
+    margin-top: 2rem;
+  }
+
+  .element h1 {
+    margin-bottom: 0.6rem;
+  }
+
+  .video {
+    width: 37rem;
   }
 }
 
@@ -64,26 +71,31 @@
     height: 28.125rem;
   }
   .area {
-    transform: translateX(1.5625rem) translateY(-3.75rem);
+    transform: translateX(1.2rem) translateY(-3rem);
   }
   .image-container {
-    transform: translateX(4.375rem);
+    transform: translateX(2rem);
   }
   .video {
-    transform: translateX(0) translateY(1.875rem);
+    width: 34.425rem;
+    transform: translateX(-2rem) translateY(-3rem);
+  }
+  .element {
+    height: 42rem;
+  }
+  .element h1 {
+    margin-bottom: 0.2rem;
+  }
+  .demo {
+    margin-top: 1rem;
   }
 }
 
 @media (max-width: 68.75rem) {
-  .A {
-    font-size: 3.6rem;
-  }
-  .word {
-    font-size: 3.6rem;
-  }
   .element h1 {
     font-size: 2.7rem;
     margin-left: 1.875rem;
+    margin-bottom: 0rem;
   }
   .element p {
     font-size: 1.1rem;
@@ -95,28 +107,29 @@
     height: 25.625rem;
   }
   .area {
-    transform: translateX(-0.9375rem) translateY(-4.375rem);
+    transform: translateX(0rem) translateY(-4rem);
   }
   .image-container {
-    transform: translateY(0) translateX(5.3125rem);
+    transform: translateX(2rem);
   }
+
   .video {
-    transform: translateX(-2.5rem) translateY(1.875rem);
+    width: 31rem;
+    min-width: fit-content;
   }
+
+  .element {
+    height: 40rem;
+  }
+
   .demo {
     padding: 0.875rem 1.25rem;
   }
 }
 
 @media (max-width: 62.5rem) {
-  .A {
-    font-size: 3.3rem;
-  }
-  .word {
-    font-size: 3.3rem;
-  }
   .element h1 {
-    font-size: 2.6rem;
+    font-size: 2.4rem;
     margin-left: 1.875rem;
   }
   .element p {
@@ -128,61 +141,97 @@
     height: 23.125rem;
   }
   .area {
-    transform: translateX(-1rem) translateY(-4.375rem);
+    transform: translateX(-0.5rem) translateY(-6rem);
   }
   .video {
-    transform: translateX(-4.5rem) translateY(1.875rem);
+    width: 29rem;
+    min-width: fit-content;
+    transform: translateX(-1.7rem) translateY(-6rem);
   }
+
   .image-container {
-    transform: translateY(0) translateX(7.5rem);
+    transform: translateX(3rem);
+  }
+  .element {
+    height: 36rem;
   }
 }
 
 @media (max-width: 56.25rem) {
+  .element h1 {
+    font-size: 2.2rem;
+    margin-left: 1.875rem;
+  }
+
+  .demo {
+    padding: 0.7rem 1rem;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .A,
+  .word {
+    font-size: 3rem !important;
+  }
+
+  .element p {
+    font-size: 0.8rem;
+    margin-left: 1.875rem;
+    margin-top: 0.5rem;
+  }
   .element iframe {
     width: 26.875rem;
     height: 20.625rem;
   }
-  .area {
-    transform: translateX(-2rem) translateY(-3.125rem);
-  }
 
   .image-container {
-    transform: translateX(10.5rem);
+    transform: translateX(3rem);
   }
 
   .video {
-    transform: translateX(-5.8rem) translateY(5rem);
+    width: 25rem;
+    min-width: fit-content;
+    transform: translateX(-2rem) translateY(-9rem);
+  }
+  .element {
+    height: 30rem;
+  }
+
+  .area {
+    transform: translateY(-9rem);
   }
 }
 
 @media (max-width: 50rem) {
-  .A {
-    font-size: 3.3rem;
-  }
-  .word {
-    font-size: 3.3rem;
-  }
   .element h1 {
-    font-size: 2.2rem;
+    font-size: 2rem;
     margin-left: 1.875rem;
   }
   .element p {
     font-size: 0.8rem;
     margin-left: 1.875rem;
   }
+  .element {
+    height: 44rem;
+  }
+
   .element iframe {
     width: 25rem;
     height: 18.125rem;
   }
-  .video {
-    transform: translateX(-9rem) translateY(5rem);
-  }
+
   .area {
-    transform: translateX(-3.4rem) translateY(-3.125rem);
+    transform: translateX(-1rem) translateY(-9rem);
   }
+
+  .video {
+    width: 25rem;
+    min-width: fit-content;
+    transform: translateX(-2rem) translateY(-9rem);
+  }
+
   .image-container {
-    transform: translateX(11rem);
+    transform: translateX(3rem);
   }
 }
 
@@ -199,7 +248,7 @@
   }
 
   .area {
-    transform: translateX(0) translateY(0rem); /* Center horizontally */
+    transform: translateX(0) translateY(-1rem); /* Center horizontally */
   }
 
   .demo {
@@ -228,17 +277,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    transform: translateX(0) translateY(-9rem);
+    width: 25rem;
+    transform: translateX(0) translateY(-2rem);
     margin: 0 auto;
+    min-width: fit-content;
   }
-
-  /* .area {
-    transform: translateX(-1.25rem) translateY(2.5rem);
-  } */
 
   .image-container {
     display: none;
+  }
+  .element {
+    height: 42rem;
   }
 }
 
@@ -247,6 +296,10 @@
     width: 25rem;
     height: 15.625rem;
   }
+
+  .video {
+    transform: translateX(0) translateY(-1rem);
+  }
 }
 
 @media (max-width: 31.25rem) {
@@ -254,11 +307,29 @@
     width: 25rem;
     height: 15.625rem;
   }
+
+  .element h1 {
+    font-size: 2rem;
+    margin-bottom: 0.6rem;
+  }
+  .element p {
+    font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+  }
 }
 
 @media (max-width: 25rem) {
-  .element iframe {
-    width: 25rem;
-    height: 15.625rem;
+  .video {
+    max-width: 23rem;
+    min-width: 20rem;
+    transform: translateX(0) translateY(-0.5rem);
+  }
+}
+
+@media (max-width: 23rem) {
+  .video {
+    max-width: 21rem;
+    min-width: 18rem;
+    transform: translateX(0) translateY(-0.9rem);
   }
 }

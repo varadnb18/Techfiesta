@@ -14,6 +14,7 @@ function FrontPage() {
       <div>
         <MiddleFP />
       </div>
+
       <div>
         <LowerFP />
       </div>

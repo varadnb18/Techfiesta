@@ -1,8 +1,9 @@
 import React from "react";
+import "./MiddleFP.css";
 
 const MiddleFP = () => {
   return (
-    <div className="bg-[#19332F] text-white text-center py-20 px-5">
+    <div className="middlefp bg-[#19332F] text-white text-center py-20 px-5">
       <h2 className="text-3xl md:text-4xl font-semibold">
         One AI Virtual Trainer
       </h2>
