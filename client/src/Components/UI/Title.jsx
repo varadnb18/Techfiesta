@@ -54,7 +54,7 @@ function Title() {
         <ProfilePopup handleLogout={handleLogout} />
       ) : (
         <Link to="/Login-Page">
-          <button className="signin px-[1.5rem] py-[0.6rem] text-base font-bold text-[#0d2436] border-[1px] border-[#6CB33F] rounded-full bg-white hover:bg-green-50 transition ml-40">
+          <button className="signin px-[1.5rem] py-[0.6rem] text-base font-bold text-[#0d2436] border-[1px] border-[#6CB33F] rounded-full bg-white hover:bg-green-50 transition">
             SignIn
           </button>
         </Link>
