@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { db } from "../FireBase/FireBase";
 import { collection, getDocs } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import "./Container.css";
 
 function Container() {
   const [data, setData] = useState([]);
@@ -35,7 +36,7 @@ function Container() {
 
   return (
     <div
-      className="grid ml-7 mr-7 gap-4 cursor-pointer"
+      className="container grid ml-7 mr-7 gap-4 cursor-pointer"
       style={{
         gridTemplateColumns: "repeat(3, 1fr)",
         placeItems: "center",
@@ -62,7 +63,7 @@ function Container() {
           data.map((datas, index) => (
             <div
               key={index}
-              className="flex flex-col items-center"
+              className="each-box flex flex-col items-center"
               onClick={() => HandleClick(datas)}
             >
               <img
