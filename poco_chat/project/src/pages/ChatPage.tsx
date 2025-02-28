@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 
 // Initialize Gemini AI with error checking
 const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
-// const API_KEY = 'AIzaSyAe427Kds-48nrzGBgdNRRCKwqntqe1YRg'
 const genAI = new GoogleGenerativeAI(API_KEY);
 
 function ChatPage() {
