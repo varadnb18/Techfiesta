@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { Send, ArrowLeft, AlertCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import "./ChatPage.css";
 
 const API_KEY = process.env.REACT_APP_GEMINI_API_KEY;
 // const API_KEY = "AIzaSyAe427Kds-48nrzGBgdNRRCKwqntqe1YRg";
@@ -140,7 +141,7 @@ Response Guidelines:
   return (
     <div className="flex flex-col h-screen bg-blue-50">
       {/* Header */}
-      <div className="bg-white shadow-md p-4 flex items-center">
+      <div className="chat-header bg-white shadow-md p-4 flex items-center">
         <button
           onClick={() => navigate("/")}
           className="mr-4 hover:bg-blue-50 p-2 rounded-full"
@@ -196,7 +197,7 @@ Response Guidelines:
       </div>
 
       {/* Input Area */}
-      <div className="bg-white p-4 shadow-lg">
+      <div className="chat-input-container bg-white p-4 shadow-lg">
         <div className="flex items-center gap-2">
           <input
             type="text"

@@ -1,0 +1,10 @@
+@media screen and (max-width: 768px) {
+  .chat-input-container {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .chat-input-container input {
+    width: 100%;
+  }
+}
