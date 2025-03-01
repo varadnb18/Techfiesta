@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { Send, ArrowLeft, AlertCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import poco from "../../Images/Poco.png";
 import "./ChatPage.css";
 
 const API_KEY = process.env.REACT_APP_GEMINI_API_KEY;
@@ -148,11 +149,7 @@ Response Guidelines:
         >
           <ArrowLeft size={24} />
         </button>
-        <img
-          src="https://images.unsplash.com/photo-1599236449650-e512da4c3e97?q=80&w=100"
-          alt="Poco"
-          className="w-10 h-10 rounded-full mr-3"
-        />
+        <img src={poco} alt="Poco" className="w-10 h-10 rounded-full mr-3" />
         <h1 className="text-xl font-semibold">Chat with Poco</h1>
       </div>
 
