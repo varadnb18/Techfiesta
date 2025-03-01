@@ -1,15 +1,19 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { GoogleGenerativeAI } from '@google/generative-ai';
-import { Send, ArrowLeft, AlertCircle } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from "react";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import { Send, ArrowLeft, AlertCircle } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
-// Initialize Gemini AI with error checking
+// Retrieve API key from .env file
 const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI(API_KEY);
 
+console.log("Gemini API Key:", API_KEY);
+
 function ChatPage() {
-  const [messages, setMessages] = useState<Array<{ role: string; content: string }>>([]);
-  const [input, setInput] = useState('');
+  const [messages, setMessages] = useState<
+    Array<{ role: string; content: string }>
+  >([]);
+  const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
@@ -48,8 +52,8 @@ Response Guidelines:
 - Always remind users to consult their healthcare provider before starting any new exercise routine`;
 
   useEffect(() => {
-    if (!API_KEY || API_KEY === 'your_gemini_api_key_here') {
-      setError('Please set up your Gemini API key in the .env file');
+    if (!API_KEY) {
+      setError("Please set up your Gemini API key in the .env file");
       return;
     }
     handleInitialMessage();
@@ -58,26 +62,28 @@ Response Guidelines:
   const handleInitialMessage = async () => {
     const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-lite" });
     const initialPrompt = `${systemPrompt}\n\nProvide a warm introduction as Poco the penguin rehabilitation assistant, mentioning your expertise in human injury recovery and rehabilitation. Ask how you can help with their recovery journey.`;
-    
+
     try {
       setIsLoading(true);
       const result = await model.generateContent(initialPrompt);
       const response = await result.response;
-      const text = response.text();
-      const initialMessage = { role: 'assistant', content: text };
+      const text = await response.text(); // Await text response
+      const initialMessage = { role: "assistant", content: text };
       setMessages([initialMessage]);
       chatHistoryRef.current = [initialMessage];
       setError(null);
     } catch (error) {
-      console.error('Error getting initial message:', error);
-      setError('Unable to connect to Poco. Please check your API key and try again.');
+      console.error("Error getting initial message:", error);
+      setError(
+        "Unable to connect to Poco. Please check your API key and try again."
+      );
     } finally {
       setIsLoading(false);
     }
   };
 
   const scrollToBottom = () => {
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   useEffect(() => {
@@ -86,39 +92,46 @@ Response Guidelines:
 
   const handleSend = async () => {
     if (!input.trim()) return;
-    if (!API_KEY || API_KEY === 'your_gemini_api_key_here') {
-      setError('Please set up your Gemini API key in the .env file');
+    if (!API_KEY) {
+      setError("Please set up your Gemini API key in the .env file");
       return;
     }
 
     const userMessage = input.trim();
-    setInput('');
-    const newUserMessage = { role: 'user', content: userMessage };
-    setMessages(prev => [...prev, newUserMessage]);
+    setInput("");
+    const newUserMessage = { role: "user", content: userMessage };
+    setMessages((prev) => [...prev, newUserMessage]);
     chatHistoryRef.current.push(newUserMessage);
     setIsLoading(true);
     setError(null);
 
     try {
-      const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-lite" });
-      
+      const model = genAI.getGenerativeModel({
+        model: "gemini-2.0-flash-lite",
+      });
+
       // Create conversation context with chat history
       const conversationContext = chatHistoryRef.current
-        .map(msg => `${msg.role === 'user' ? 'User' : 'Assistant'}: ${msg.content}`)
-        .join('\n');
+        .map(
+          (msg) =>
+            `${msg.role === "user" ? "User" : "Assistant"}: ${msg.content}`
+        )
+        .join("\n");
 
       const prompt = `${systemPrompt}\n\nConversation history:\n${conversationContext}\n\nUser: ${userMessage}\n\nProvide a direct and helpful response to the user's question without repeating your introduction. If they ask about an exercise, provide detailed instructions and benefits.`;
-      
+
       const result = await model.generateContent(prompt);
       const response = await result.response;
-      const text = response.text();
-      
-      const newAssistantMessage = { role: 'assistant', content: text };
-      setMessages(prev => [...prev, newAssistantMessage]);
+      const text = await response.text(); // Await text response
+
+      const newAssistantMessage = { role: "assistant", content: text };
+      setMessages((prev) => [...prev, newAssistantMessage]);
       chatHistoryRef.current.push(newAssistantMessage);
     } catch (error) {
-      console.error('Error getting response:', error);
-      setError('Sorry, I had trouble processing your message. Please try again.');
+      console.error("Error getting response:", error);
+      setError(
+        "Sorry, I had trouble processing your message. Please try again."
+      );
     } finally {
       setIsLoading(false);
     }
@@ -128,8 +141,8 @@ Response Guidelines:
     <div className="flex flex-col h-screen bg-blue-50">
       {/* Header */}
       <div className="bg-white shadow-md p-4 flex items-center">
-        <button 
-          onClick={() => navigate('/')}
+        <button
+          onClick={() => navigate("/")}
           className="mr-4 hover:bg-blue-50 p-2 rounded-full"
         >
           <ArrowLeft size={24} />
@@ -156,14 +169,16 @@ Response Guidelines:
           <div
             key={index}
             className={`mb-4 ${
-              message.role === 'user' ? 'flex justify-end' : 'flex justify-start'
+              message.role === "user"
+                ? "flex justify-end"
+                : "flex justify-start"
             }`}
           >
             <div
               className={`max-w-[80%] rounded-lg p-3 ${
-                message.role === 'user'
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-white text-gray-800'
+                message.role === "user"
+                  ? "bg-blue-600 text-white"
+                  : "bg-white text-gray-800"
               }`}
             >
               {message.content}
@@ -187,7 +202,7 @@ Response Guidelines:
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+            onKeyDown={(e) => e.key === "Enter" && handleSend()} // Using onKeyDown event
             placeholder="Ask Poco about rehabilitation..."
             className="flex-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             disabled={!!error}

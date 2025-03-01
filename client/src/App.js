@@ -9,6 +9,8 @@ import ProfilePage from "./Components/Pages/ProfilePage";
 import SplitingWindow from "./Components/Pages/SplitingWindow";
 import FrontPage from "./Components/Pages/FrontPage";
 import ProtectedRoute from "./ProtectedRoute";
+import ChatPage from "./Components/UI/ChatPage";
+import ChatBot from "./Components/Pages/ChatBot";
 
 const isAuthenticated = () => {
   return localStorage.getItem("authToken") !== null;
@@ -33,6 +35,24 @@ function App() {
           </ProtectedRoute>
         }
       />
+
+      <Route
+        path="/chat"
+        element={
+          <ProtectedRoute>
+            <ChatBot />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/chatbot"
+        element={
+          <ProtectedRoute>
+            <ChatPage />
+          </ProtectedRoute>
+        }
+      />
       <Route
         path="/Profile"
         element={
@@ -41,6 +61,7 @@ function App() {
           </ProtectedRoute>
         }
       />
+
       <Route
         path="/:name"
         element={
