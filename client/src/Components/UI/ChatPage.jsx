@@ -3,6 +3,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { Send, ArrowLeft, AlertCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import poco from "../../Images/Poco.png";
+import hake from "../../Images/Hake.jpg";
 import "./ChatPage.css";
 
 const API_KEY = process.env.REACT_APP_GEMINI_API_KEY;
@@ -59,27 +60,42 @@ Response Guidelines:
     handleInitialMessage();
   }, []);
 
-  const handleInitialMessage = async () => {
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-lite" });
-    const initialPrompt = `${systemPrompt}\n\nProvide a warm introduction as Poco the penguin rehabilitation assistant, mentioning your expertise in human injury recovery and rehabilitation. Ask how you can help with their recovery journey.`;
+  // const handleInitialMessage = async () => {
+  //   const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-lite" });
+  //   const initialPrompt = `${systemPrompt}\n\nProvide a warm introduction as Poco the penguin rehabilitation assistant, mentioning your expertise in human injury recovery and rehabilitation. Ask how you can help with their recovery journey.`;
 
-    try {
-      setIsLoading(true);
-      const result = await model.generateContent(initialPrompt);
-      const response = await result.response;
-      const text = await response.text(); // Await text response
-      const initialMessage = { role: "assistant", content: text };
+  //   try {
+  //     setIsLoading(true);
+  //     const result = await model.generateContent(initialPrompt);
+  //     const response = await result.response;
+  //     const text = await response.text(); // Await text response
+  //     const initialMessage = { role: "assistant", content: text };
+  //     setMessages([initialMessage]);
+  //     chatHistoryRef.current = [initialMessage];
+  //     setError(null);
+  //   } catch (error) {
+  //     console.error("Error getting initial message:", error);
+  //     setError(
+  //       "Unable to connect to Poco. Please check your API key and try again."
+  //     );
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
+
+  const handleInitialMessage = () => {
+    setIsLoading(true); // Start loading
+
+    setTimeout(() => {
+      const initialMessage = {
+        role: "assistant",
+        content: "Hello my dear students",
+      };
+
       setMessages([initialMessage]);
       chatHistoryRef.current = [initialMessage];
-      setError(null);
-    } catch (error) {
-      console.error("Error getting initial message:", error);
-      setError(
-        "Unable to connect to Poco. Please check your API key and try again."
-      );
-    } finally {
-      setIsLoading(false);
-    }
+      setIsLoading(false); // Stop loading after delay
+    }, 1500);
   };
 
   const scrollToBottom = () => {
@@ -149,8 +165,8 @@ Response Guidelines:
         >
           <ArrowLeft size={24} />
         </button>
-        <img src={poco} alt="Poco" className="w-10 h-10 rounded-full mr-3" />
-        <h1 className="text-xl font-semibold">Chat with Poco</h1>
+        <img src={hake} alt="Poco" className="w-10 h-10 rounded-full mr-3" />
+        <h1 className="text-xl font-semibold">Chat with Hake</h1>
       </div>
 
       {/* Error Message */}
@@ -186,7 +202,7 @@ Response Guidelines:
         {isLoading && (
           <div className="flex justify-start mb-4">
             <div className="bg-white text-gray-800 rounded-lg p-3">
-              Poco is typing...
+              Hake is typing...
             </div>
           </div>
         )}
