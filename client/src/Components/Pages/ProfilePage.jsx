@@ -5,7 +5,8 @@ import StreakCalendar from "../Calendar/StreakCalendar";
 import YogaScreenTimeChart from "../UI/YogaScreenTimeChart";
 import ExerciseTimeChart from "../UI/ExerciseTimeChart";
 import ProfileTitle from "../UI/ProfileTitle";
-import PersonalInfo from "../UI/PersonalInfo"; // <-- Import the new file
+import PersonalInfo from "../UI/PersonalInfo";
+import ChatBotIcon from "./ChatBot";
 
 const StatBox = ({ number, label }) => (
   <div className="w-32 h-32 border border-gray-300 rounded flex flex-col items-center justify-center text-center">
@@ -113,6 +114,9 @@ function ProfilePage() {
 
         <PersonalInfo userData={userData} loading={loading} />
       </div>
+
+      {/* Chatbot Icon */}
+      <ChatBotIcon />
     </div>
   );
 }

@@ -4,6 +4,7 @@ import LowerFP from "../UI/LowerFP";
 import MiddleFP from "../UI/MiddleFP";
 import BottomFP from "../UI/BottomFP";
 import Footer from "../UI/Footer";
+import ChatBotIcon from "./ChatBot";
 
 function FrontPage() {
   return (
@@ -14,7 +15,6 @@ function FrontPage() {
       <div>
         <MiddleFP />
       </div>
-
       <div>
         <LowerFP />
       </div>
@@ -24,6 +24,9 @@ function FrontPage() {
       <div>
         <Footer />
       </div>
+
+      {/* Chatbot Icon */}
+      <ChatBotIcon />
     </>
   );
 }

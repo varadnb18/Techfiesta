@@ -3,6 +3,7 @@ import SearchBar from "../Header/SearchBar";
 import Container from "../UI/Container";
 import FilterDropdown from "../UI/FilterDropdown";
 import Title from "../UI/Title";
+import ChatBotIcon from "./ChatBot";
 
 function SecondPage() {
   const [active, setActive] = useState("Classes");
@@ -83,6 +84,9 @@ function SecondPage() {
           </div>
         </div>
       </div>
+
+      {/* Chatbot Icon */}
+      <ChatBotIcon />
     </>
   );
 }
