@@ -60,7 +60,8 @@ graph TD
   - 🧍‍♂️ Shoulder Stand
   - 🌳 Tree Pose
   - 🪵 Plank Pose
-- **Real-Time Accuracy Scoring**: Receive live visual feedback. The skeleton turns **green** when your form is correct and **red** when you need to adjust.
+- **Fault-Tolerant Hybrid Scoring**: The final accuracy score uses a `Math.max()` blend between the Neural Network's confidence and the Geometric Gate's pure math, ensuring a smooth, highly resilient user experience that isn't easily fooled by bad lighting or weird camera angles.
+- **Targeted Limb Highlighting & Text Coaching**: The Geometric Math Gate precisely calculates your joint angles to identify the exact point of failure. It draws *only* the incorrect limbs in **red** while keeping correct limbs **green**, and pushes real-time, actionable text coaching to the screen (e.g., *"Straighten your back!"* or *"Bend your knees more!"*).
 - **Timer & High Scores**: The hold-timer only increments if your accuracy is above the threshold!
 - **Poco AI Assistant**: A built-in Flask backend integrating the Google Gemini API for fitness and yoga chatting.
 - **Cloud Database**: Integrated with Firebase to save user sessions and high scores.
