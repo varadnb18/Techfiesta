@@ -39,15 +39,16 @@ const SignInForm = ({ handleFocus, handleBlur, toggleForm }) => {
       // Show toast for successful login
       toast.success("Login Successful!", { id: toastId, duration: 3000 });
       
-      await updateStreak();
+      // Update streak in the background (no need to await and block login)
+      updateStreak();
 
       const token = await user.getIdToken();
       localStorage.setItem("authToken", token);
 
       setSignin({ email: "", password: "" });
       
-      // Delay navigation to allow toast visibility
-      setTimeout(() => navigate("/"), 1500);
+      // Navigate immediately! Toaster in App.js keeps the toast visible across pages
+      navigate("/");
     } catch (err) {
       console.log(err.message);
       toast.error("Invalid Credentials", {id : toastId});

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import * as tf from "@tensorflow/tfjs";
 import "./WebCam.css";
 import { useParams } from "react-router-dom";
-import { poseClasses, POSE_CONNECTIONS } from "./utils/PoseConstants";
+import { poseClasses, POSE_CONNECTIONS, LEFT_ARM_CONNECTIONS, RIGHT_ARM_CONNECTIONS, LEFT_LEG_CONNECTIONS, RIGHT_LEG_CONNECTIONS, TORSO_CONNECTIONS } from "./utils/PoseConstants";
 import {
   calculatePoseAccuracy,
   setupSimplePoseClassifier,
@@ -24,6 +24,7 @@ function WebCam() {
   const [accuracy, setAccuracy] = useState(0);
   const [isCorrectPose, setIsCorrectPose] = useState(false);
   const [messageStatus, setMessageStatus] = useState("Take the correct pose");
+  const [coachingFeedback, setCoachingFeedback] = useState("");
   const [modelLoaded, setModelLoaded] = useState(false);
 
   const poseClassifier = useRef(null);
@@ -44,6 +45,7 @@ function WebCam() {
       setSelectedPose(name);
       setAccuracy(0);
       setIsCorrectPose(false);
+      setCoachingFeedback("");
       resetPoseState();
     }
   }, [name, selectedPose, resetPoseState]);
@@ -128,6 +130,8 @@ function WebCam() {
           
           const isPoseCorrectResult = result.isCorrect;
           setAccuracy(result.accuracy);
+          const failingLimbs = result.failingLimbs || [];
+          setCoachingFeedback(result.feedback || "");
 
           ctx.strokeStyle = isPoseCorrectResult ? "#00FF00" : "#FF0000";
           ctx.fillStyle = isPoseCorrectResult ? "#00FF00" : "#FF0000";
@@ -139,10 +143,20 @@ function WebCam() {
             ctx.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
           }
 
-          drawConnectors(ctx, results.poseLandmarks, POSE_CONNECTIONS, {
-            color: isPoseCorrectResult ? "#00FF00" : "#FF0000",
-            lineWidth: 4,
-          });
+          const drawLimb = (connections, limbName) => {
+            const isFailing = failingLimbs.includes(limbName);
+            const color = isPoseCorrectResult ? "#00FF00" : (isFailing ? "#FF0000" : "#00FF00");
+            drawConnectors(ctx, results.poseLandmarks, connections, {
+              color,
+              lineWidth: 4,
+            });
+          };
+
+          drawLimb(LEFT_ARM_CONNECTIONS, "left_arm");
+          drawLimb(RIGHT_ARM_CONNECTIONS, "right_arm");
+          drawLimb(LEFT_LEG_CONNECTIONS, "left_leg");
+          drawLimb(RIGHT_LEG_CONNECTIONS, "right_leg");
+          drawLimb(TORSO_CONNECTIONS, "torso");
 
           drawLandmarks(ctx, results.poseLandmarks, {
             color: isPoseCorrectResult ? "#00FF00" : "#FF0000",
@@ -231,6 +245,12 @@ function WebCam() {
             <canvas ref={canvasRef} width="640" height="480" />
             <div className="instruction-overlay">
               <div className="status-message">{messageStatus}</div>
+              
+              {coachingFeedback && !isCorrectPose && (
+                <div className="coaching-message" style={{ color: "#FF9800", fontWeight: "bold", marginTop: "10px", fontSize: "1.2rem", background: "rgba(0,0,0,0.5)", padding: "5px 10px", borderRadius: "5px" }}>
+                  {coachingFeedback}
+                </div>
+              )}
 
               {isCorrectPose && (
                 <div className="success-message">

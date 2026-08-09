@@ -28,11 +28,13 @@ export function getThresholdForPose(poseName) {
 export function setupSimplePoseClassifier() {
   return {
     classify: (landmarks, targetPose) => {
-      const geoScore = geometricGate(landmarks, targetPose);
+      const geoResult = geometricGate(landmarks, targetPose);
       return {
         pose: targetPose,
-        confidence: geoScore / 100,
-        accuracy: geoScore,
+        confidence: geoResult.score / 100,
+        accuracy: geoResult.score,
+        feedback: geoResult.feedback,
+        failingLimbs: geoResult.failingLimbs,
       };
     },
   };
@@ -45,15 +47,16 @@ export function calculatePoseAccuracy(
   fallbackClassifier,
 ) {
   if (!landmarks || landmarks.length < 33) {
-    return { accuracy: 0, isCorrect: false };
+    return { accuracy: 0, isCorrect: false, feedback: "No person detected.", failingLimbs: [] };
   }
 
-  const geoScore = geometricGate(landmarks, targetPose);
+  const geoResult = geometricGate(landmarks, targetPose);
+  const geoScore = geoResult.score;
 
   // If the geometric gate returns 0, give a small grace score instead of hard 0
   // This prevents the user from seeing 0% when they are close to the pose
   if (geoScore === 0) {
-    return { accuracy: 0, isCorrect: false };
+    return { accuracy: 0, isCorrect: false, feedback: geoResult.feedback, failingLimbs: geoResult.failingLimbs };
   }
 
   let modelConfidence = 0;
@@ -96,5 +99,7 @@ export function calculatePoseAccuracy(
   return {
     accuracy: finalAccuracy,
     isCorrect: finalAccuracy > threshold,
+    feedback: geoResult.feedback,
+    failingLimbs: geoResult.failingLimbs,
   };
 }

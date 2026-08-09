@@ -21,3 +21,30 @@ export const POSE_CONNECTIONS = [
   [24, 26],
   [26, 28], // right leg
 ];
+
+export const LEFT_ARM_CONNECTIONS = [
+  [11, 13],
+  [13, 15],
+];
+
+export const RIGHT_ARM_CONNECTIONS = [
+  [12, 14],
+  [14, 16],
+];
+
+export const LEFT_LEG_CONNECTIONS = [
+  [23, 25],
+  [25, 27],
+];
+
+export const RIGHT_LEG_CONNECTIONS = [
+  [24, 26],
+  [26, 28],
+];
+
+export const TORSO_CONNECTIONS = [
+  [11, 12],
+  [11, 23],
+  [12, 24],
+  [23, 24],
+];
