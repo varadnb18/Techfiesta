@@ -145,7 +145,8 @@ function WebCam() {
 
           const drawLimb = (connections, limbName) => {
             const isFailing = failingLimbs.includes(limbName);
-            const color = isPoseCorrectResult ? "#00FF00" : (isFailing ? "#FF0000" : "#00FF00");
+            // Always highlight failing limbs in red, even if overall pose passes the low threshold
+            const color = isFailing ? "#FF0000" : "#00FF00";
             drawConnectors(ctx, results.poseLandmarks, connections, {
               color,
               lineWidth: 4,
@@ -246,7 +247,7 @@ function WebCam() {
             <div className="instruction-overlay">
               <div className="status-message">{messageStatus}</div>
               
-              {coachingFeedback && !isCorrectPose && (
+              {coachingFeedback && (
                 <div className="coaching-message" style={{ color: "#FF9800", fontWeight: "bold", marginTop: "10px", fontSize: "1.2rem", background: "rgba(0,0,0,0.5)", padding: "5px 10px", borderRadius: "5px" }}>
                   {coachingFeedback}
                 </div>

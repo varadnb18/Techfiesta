@@ -54,9 +54,17 @@ export const geometricGate = (landmarks, targetPose) => {
         const armsUp = leftArmUp && rightArmUp;
         const oneArmUp = leftArmUp || rightArmUp;
 
+        // Check if arms are actually straight, not just bent at 90 degrees (cactus arms)
+        const leftArmAngle = angleBetween(leftShoulder, leftElbow, leftWrist);
+        const rightArmAngle = angleBetween(rightShoulder, rightElbow, rightWrist);
+        const armsStraight = leftArmAngle > 140 && rightArmAngle > 140;
+
         if (!armsUp) {
             failingLimbs.push("left_arm", "right_arm");
             feedback = "Raise both arms above your head!";
+        } else if (!armsStraight) {
+            failingLimbs.push("left_arm", "right_arm");
+            feedback = "Straighten your arms completely overhead!";
         } else {
             feedback = "Great tree pose!";
         }
@@ -64,11 +72,16 @@ export const geometricGate = (landmarks, targetPose) => {
         const midHipX = (leftHip.x + rightHip.x) / 2;
         const balanceScore = Math.max(0, 1 - Math.abs(nose.x - midHipX) * 2);
 
-        let score = 55;
-        if (armsUp) score += 35;
-        else if (oneArmUp) score += 15;
-        
-        score += balanceScore * 10;
+        let score = 10; // lower base score
+        score += balanceScore * 30; // up to 30 for balance
+
+        if (armsUp && armsStraight) {
+            score += 60; 
+        } else if (armsUp && !armsStraight) {
+            score += 25; // partial credit for cactus arms
+        } else if (oneArmUp) {
+            score += 10;
+        }
 
         return { score: Math.min(100, Math.round(score)), feedback, failingLimbs };
       }
@@ -79,7 +92,7 @@ export const geometricGate = (landmarks, targetPose) => {
         const rightKneeAngleDeg = angleBetween(rightHip, rightKnee, rightAnkle);
         const avgKneeBend = (leftKneeAngleDeg + rightKneeAngleDeg) / 2;
 
-        if (avgKneeBend > 172) {
+        if (avgKneeBend > 165) {
           failingLimbs.push("left_leg", "right_leg");
           feedback = "Bend your knees to sit in the chair!";
           return { score: 0, feedback, failingLimbs };
@@ -103,16 +116,16 @@ export const geometricGate = (landmarks, targetPose) => {
             feedback = "Perfect chair posture!";
         }
 
-        const bendScore = Math.max(0, Math.min(1, (172 - avgKneeBend) / 82));
+        const bendScore = Math.max(0, Math.min(1, (165 - avgKneeBend) / 75));
         const midHipX = (leftHip.x + rightHip.x) / 2;
         const balanceScore = Math.max(0, 1 - Math.abs(nose.x - midHipX) * 5);
 
-        let score = 40;
-        score += bendScore * 30;
-        if (armsUp) score += 15;
-        else if (oneArmUp) score += 8;
-        if (torsoUpright) score += 5;
-        score += balanceScore * 10;
+        let score = 10;
+        score += bendScore * 40;
+        if (armsUp) score += 20;
+        else if (oneArmUp) score += 10;
+        if (torsoUpright) score += 10;
+        score += balanceScore * 20;
 
         return { score: Math.min(100, Math.round(score)), feedback, failingLimbs };
       }
@@ -123,13 +136,13 @@ export const geometricGate = (landmarks, targetPose) => {
         const shoulderHipDiffR = Math.abs(rightShoulder.y - rightHip.y);
         const avgShoulderHipDiff = (shoulderHipDiffL + shoulderHipDiffR) / 2;
         
-        const bodyIsHorizontal = avgShoulderHipDiff < 0.45;
+        const bodyIsHorizontal = avgShoulderHipDiff < 0.25;
         const bodyLength = Math.abs((leftShoulder.x + rightShoulder.x) / 2 - (leftAnkle.x + rightAnkle.x) / 2);
-        const isSideOn = bodyLength > 0.01;
+        const isSideOn = bodyLength > 0.3;
 
         if (!bodyIsHorizontal || !isSideOn) {
             failingLimbs.push("torso", "left_leg", "right_leg");
-            feedback = "Get into a pushup position!";
+            feedback = "Get down into a pushup position!";
             return { score: 0, feedback, failingLimbs };
         }
 
@@ -149,23 +162,23 @@ export const geometricGate = (landmarks, targetPose) => {
         const onHands = leftWrist.y > leftShoulder.y - 0.05 && rightWrist.y > rightShoulder.y - 0.05;
         const hasSupport = onForearms || onHands;
 
-        let score = 50;
-        score += straightnessScore * 20;
-        score += hasSupport ? 20 : 0;
-        const flatnessScore = Math.max(0, 1 - avgShoulderHipDiff * 3);
-        score += flatnessScore * 10;
+        let score = 10;
+        score += straightnessScore * 40;
+        score += hasSupport ? 30 : 0;
+        const flatnessScore = Math.max(0, 1 - avgShoulderHipDiff * 4);
+        score += flatnessScore * 20;
 
         return { score: Math.min(100, Math.round(score)), feedback, failingLimbs };
       }
 
       // ── SHOULDER STAND ────────────────────────────────────────────
       case "shoulder_stand": {
-        const anklesAboveHips = leftAnkle.y < leftHip.y + 0.15 || rightAnkle.y < rightHip.y + 0.15;
-        const anklesNearShoulders = leftAnkle.y < leftShoulder.y + 0.35 || rightAnkle.y < rightShoulder.y + 0.35;
+        const anklesAboveHips = leftAnkle.y < leftHip.y - 0.1 || rightAnkle.y < rightHip.y - 0.1;
+        const hipsAboveShoulders = leftHip.y < leftShoulder.y - 0.1 || rightHip.y < rightShoulder.y - 0.1;
 
-        if (!anklesAboveHips && !anklesNearShoulders) {
-            failingLimbs.push("left_leg", "right_leg");
-            feedback = "Lift your legs straight up into the air!";
+        if (!anklesAboveHips || !hipsAboveShoulders) {
+            failingLimbs.push("left_leg", "right_leg", "torso");
+            feedback = "Lie on your back and lift your legs and hips straight up!";
             return { score: 0, feedback, failingLimbs };
         }
 
@@ -184,21 +197,22 @@ export const geometricGate = (landmarks, targetPose) => {
         const verticalScore = Math.min(1, legVerticality * 4);
         const backSupport = leftElbow.y > leftShoulder.y - 0.15 || rightElbow.y > rightShoulder.y - 0.15;
 
-        let score = 50;
-        score += verticalScore * 20;
-        score += backSupport ? 15 : 0;
-        score += legsStraight ? 15 : 5;
+        let score = 10;
+        score += verticalScore * 50;
+        score += backSupport ? 20 : 0;
+        score += legsStraight ? 20 : 0;
 
         return { score: Math.min(100, Math.round(score)), feedback, failingLimbs };
       }
 
       // ── COBRA POSE ────────────────────────────────────────────────
       case "cobra": {
-        const chestLifted = leftShoulder.y < leftHip.y + 0.35 || rightShoulder.y < rightHip.y + 0.35;
+        const isLyingDown = leftHip.y > leftKnee.y - 0.1 && leftAnkle.y > leftKnee.y - 0.1;
+        const chestLifted = leftShoulder.y < leftHip.y - 0.1 || rightShoulder.y < rightHip.y - 0.1;
 
-        if (!chestLifted) {
-            failingLimbs.push("torso");
-            feedback = "Press into your hands and lift your chest!";
+        if (!isLyingDown || !chestLifted) {
+            failingLimbs.push("torso", "left_leg", "right_leg");
+            feedback = "Lie on your stomach and lift your chest!";
             return { score: 0, feedback, failingLimbs };
         }
 
@@ -219,11 +233,11 @@ export const geometricGate = (landmarks, targetPose) => {
         const hipsLow = leftHip.y > leftKnee.y - 0.2 || rightHip.y > rightKnee.y - 0.2;
         const archScore = Math.max(0, Math.min(1, (180 - avgSpineAngle) / 60));
 
-        let score = 45;
-        score += liftScore * 20;
-        score += armsPropping ? 15 : 0;
-        score += hipsLow ? 5 : 0;
-        score += archScore * 15;
+        let score = 10;
+        score += liftScore * 30;
+        score += armsPropping ? 20 : 0;
+        score += hipsLow ? 10 : 0;
+        score += archScore * 30;
 
         return { score: Math.min(100, Math.round(score)), feedback, failingLimbs };
       }
@@ -235,9 +249,9 @@ export const geometricGate = (landmarks, targetPose) => {
         const avgAnkleY = (leftAnkle.y + rightAnkle.y) / 2;
         const avgWristY = (leftWrist.y + rightWrist.y) / 2;
 
-        const hipsUp = avgHipY < avgShoulderY + 0.15;
-        const handsDown = avgWristY > avgShoulderY - 0.15;
-        const feetDown = avgAnkleY > avgHipY - 0.15;
+        const hipsUp = avgHipY < avgShoulderY - 0.1;
+        const handsDown = avgWristY > avgShoulderY + 0.1;
+        const feetDown = avgAnkleY > avgHipY + 0.1;
 
         if (!hipsUp || !handsDown || !feetDown) {
             failingLimbs.push("torso");
@@ -266,10 +280,10 @@ export const geometricGate = (landmarks, targetPose) => {
         const hipElevation = Math.max(0, ((avgShoulderY - avgHipY) + (avgAnkleY - avgHipY)) / 2);
         const vShapeScore = Math.min(1, hipElevation * 5);
 
-        let score = 45;
-        score += vShapeScore * 25;
-        score += armsStraight ? 15 : 5;
-        score += legsStraight ? 15 : 5;
+        let score = 10;
+        score += vShapeScore * 50;
+        score += armsStraight ? 20 : 0;
+        score += legsStraight ? 20 : 0;
 
         return { score: Math.min(100, Math.round(score)), feedback, failingLimbs };
       }
